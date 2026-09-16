@@ -10,9 +10,9 @@ export const CourseCard = () => {
       id="active-course-banner-card"
       className="border rounded-2xl overflow-hidden"
     >
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="flex flex-wrap items-center  justify-between gap-3 mb-4">
-          <h2 className="text-2xl font-bold tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight break-words min-w-0">
             {courseDetails.title}
           </h2>
           <span
@@ -35,7 +35,7 @@ export const CourseCard = () => {
         </div>
       </div>
       <div className="border-t border-gray-300" />
-      <div className="px-6 py-5">
+      <div className="px-4 sm:px-6 py-4 sm:py-5">
         <div className="mb-6 flex flex-col gap-5">
           <div>
             <div className="flex justify-between items-center text-sm mb-2">

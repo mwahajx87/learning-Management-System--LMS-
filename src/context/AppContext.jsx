@@ -18,6 +18,10 @@ export const AppProvider = ({ children }) => {
   const [activeNav, setActiveNav] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
+  // Mobile Sidebar Drawer State (off-canvas on < lg screens)
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const closeMobileSidebar = () => setIsMobileSidebarOpen(false);
+
   // Student Profile Data
   const [student, setStudent] = useState({
     name: "M.Wahaj",
@@ -1348,6 +1352,9 @@ export const AppProvider = ({ children }) => {
         setActiveNav,
         sidebarCollapsed,
         setSidebarCollapsed,
+        isMobileSidebarOpen,
+        setIsMobileSidebarOpen,
+        closeMobileSidebar,
         student,
         courseDetails,
         scheduleDays,

@@ -54,12 +54,12 @@ export const ScheduleWidget = () => {
       {/* Selected Day Status */}
       <div className="mt-3.5 pt-3 border-t text-xs">
         {scheduleDays.find((d) => d.date === selectedScheduleDay)?.hasClass ? (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <span className="font-semibold">Live Lecture & Lab Practice</span>
             <span className="text-[11.5px] font-mono">01:00 PM – 03:00 PM</span>
           </div>
         ) : (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <span>Self-Study & Revision Day</span>
             <span className="text-[11px] font-mono">No Scheduled Class</span>
           </div>

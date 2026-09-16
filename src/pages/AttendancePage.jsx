@@ -63,9 +63,9 @@ export const AttendancePage = () => {
       {/* 2. Attendance Overview Progress Card matching attendance page.png */}
       <div
         id="attendance-overview-banner"
-        className="border rounded-2xl p-6"
+        className="border rounded-2xl p-4 sm:p-6"
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
           <div>
             <h3 className="text-lg font-bold tracking-normal leading-snug">
               Attendance Overview
@@ -107,8 +107,8 @@ export const AttendancePage = () => {
         </div>
       </div>
 
-      {/* 4. Attendance Records Table matching attendance page.png */}
-      <div className="border rounded-2xl overflow-hidden shadow-sm">
+      {/* 4. Attendance Records Table matching attendance page.png (desktop) */}
+      <div className="hidden sm:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -144,6 +144,22 @@ export const AttendancePage = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Attendance Records Cards (mobile — stacked card layout) */}
+      <div className="sm:hidden space-y-3">
+        {currentRecords.map((record) => (
+          <div
+            key={record.classNumber}
+            className="border rounded-2xl p-4 flex items-center justify-between gap-3"
+          >
+            <div className="min-w-0">
+              <div className="text-sm font-bold">{record.classNumber}</div>
+              <div className="text-xs mt-0.5">{record.date}</div>
+            </div>
+            <StatusBadge status={record.status} />
+          </div>
+        ))}
       </div>
     </div>
   );

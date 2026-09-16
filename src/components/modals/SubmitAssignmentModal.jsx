@@ -54,12 +54,12 @@ export const SubmitAssignmentModal = () => {
         id="submit-assignment-modal-card"
         className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden my-8"
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b">
-          <div>
-            <h2 className="text-lg font-bold tracking-tight">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b">
+          <div className="min-w-0">
+            <h2 className="text-base sm:text-lg font-bold tracking-tight">
               Submit Assignment
             </h2>
-            <p className="text-xs truncate max-w-sm mt-0.5">
+            <p className="text-xs truncate max-w-[60vw] sm:max-w-sm mt-0.5">
               {editingAssignment.title}
             </p>
           </div>
@@ -72,7 +72,7 @@ export const SubmitAssignmentModal = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto max-h-[70dvh] sm:max-h-none">
           <div>
               <label className="block text-xs font-semibold uppercase tracking-wider mb-2">
               Live Deployment URL (Vercel / Netlify / Firebase)

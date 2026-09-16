@@ -64,8 +64,8 @@ export const AssignmentPage = () => {
         />
       </div>
 
-      {/* Assignments Table matching assignment full page.png & page 2 */}
-      <div className="border rounded-2xl overflow-hidden shadow-sm">
+      {/* Assignments Table matching assignment full page.png & page 2 (desktop) */}
+      <div className="hidden md:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -188,8 +188,8 @@ export const AssignmentPage = () => {
         </div>
 
         {/* Pagination Controls matching screenshot */}
-        <div className="flex items-center justify-between px-6 py-4 border-t">
-          <div className="text-xs leading-tight select-none">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-4 border-t">
+          <div className="text-xs leading-tight select-none text-center sm:text-left">
             <div>
               Showing {(currentPage - 1) * pageSize + 1}-
               {Math.min(currentPage * pageSize, assignments.length)} of{' '}
@@ -198,7 +198,7 @@ export const AssignmentPage = () => {
             <div>records</div>
           </div>
 
-          <div className="flex items-center gap-3 select-none">
+          <div className="flex items-center gap-3 select-none flex-wrap justify-center">
             <button
               id="pagination-prev-btn"
               disabled={currentPage === 1}
@@ -238,6 +238,119 @@ export const AssignmentPage = () => {
                 currentPage === totalPages
                   ? 'cursor-not-allowed'
                   : ' cursor-pointer'
+              }`}
+            >
+              <span>Next</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Assignments Cards (mobile — stacked card layout) */}
+      <div className="md:hidden space-y-3">
+        {paginatedAssignments.map((asg) => (
+          <div key={asg.id} className="border rounded-2xl p-4 space-y-3">
+            {/* Title + Hackathon pill + Status */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm font-medium">{asg.title}</span>
+                  {asg.isHackathon && <StatusBadge status="HACKATHON" />}
+                </div>
+                <div className="text-xs mt-1">
+                  {asg.topicsCount > 0
+                    ? `${asg.topicsCount} ${asg.topicsCount === 1 ? 'Topic' : 'Topics'}`
+                    : 'No topics'}
+                </div>
+              </div>
+              <StatusBadge status={asg.status} />
+            </div>
+
+            {/* Due Date + Actions */}
+            <div className="flex items-center justify-between gap-3 text-xs">
+              <div>
+                <div className="mb-1">Due Date</div>
+                <span className="font-semibold">{asg.dueDate}</span>
+              </div>
+
+              {asg.submissionsClosed ? (
+                <span className="text-xs italic font-normal tracking-wide">
+                  Submissions closed
+                </span>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setSelectedAssignment(asg)}
+                    className="p-2 rounded-lg border transition-colors"
+                    title="View Assignment Details"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setEditingAssignment(asg)}
+                    className="p-2 rounded-lg border transition-colors"
+                    title="Upload / Submit Link"
+                  >
+                    <Upload className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setEditingAssignment(asg)}
+                    className="p-2 rounded-lg border transition-colors"
+                    title="Edit Submission Notes"
+                  >
+                    <Edit2 className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination Controls (mobile) */}
+      <div className="md:hidden border rounded-2xl overflow-hidden shadow-sm">
+        <div className="flex flex-col items-center justify-between gap-3 px-4 py-4">
+          <div className="text-xs leading-tight select-none text-center">
+            <div>
+              Showing {(currentPage - 1) * pageSize + 1}-
+              {Math.min(currentPage * pageSize, assignments.length)} of{' '}
+              {assignments.length}
+            </div>
+            <div>records</div>
+          </div>
+
+          <div className="flex items-center gap-3 select-none flex-wrap justify-center">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
+                currentPage === 1 ? 'cursor-not-allowed' : ' cursor-pointer'
+              }`}
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+              <span>Previous</span>
+            </button>
+
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <button
+                  key={`m-${pageNum}`}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors flex items-center justify-center ${
+                    currentPage === pageNum ? 'border' : ''
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
+            </div>
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
+                currentPage === totalPages ? 'cursor-not-allowed' : ' cursor-pointer'
               }`}
             >
               <span>Next</span>

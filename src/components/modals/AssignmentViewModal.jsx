@@ -21,8 +21,8 @@ export const AssignmentViewModal = () => {
         className="border bg-[#0d0f13] w-full max-w-[620px] rounded-2xl shadow-2xl overflow-hidden my-6 animate-scale-in"
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b">
-          <h2 className="text-lg font-bold tracking-normal">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b">
+          <h2 className="text-base sm:text-lg font-bold tracking-normal">
             Assignment Information
           </h2>
           <button
@@ -35,9 +35,9 @@ export const AssignmentViewModal = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-5 max-h-[70dvh] sm:max-h-[80vh] overflow-y-auto">
           {/* Top Details Card */}
-          <div className="border rounded-xl p-5 space-y-4">
+          <div className="border rounded-xl p-4 sm:p-5 space-y-4">
             <div>
               <div className="text-xs font-normal">
                 Title
@@ -189,7 +189,7 @@ export const AssignmentViewModal = () => {
         </div>
 
         {/* Modal Footer */}
-        <div className="flex items-center justify-end px-6 py-4 border-t">
+        <div className="flex items-center justify-end px-4 sm:px-6 py-3.5 sm:py-4 border-t">
           <button
             id="close-assignment-modal-footer-btn"
             onClick={() => setSelectedAssignment(null)}

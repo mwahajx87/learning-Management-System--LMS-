@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   LayoutGrid,
   BookOpen,
@@ -13,6 +13,7 @@ import {
   Users,
   Calendar,
   ArrowLeftRight,
+  X,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import avatarImg from "../../assets/images/student_avatar_1789503254707.jpg";
@@ -24,6 +25,8 @@ export const Sidebar = () => {
     setActiveNav,
     sidebarCollapsed,
     setSidebarCollapsed,
+    isMobileSidebarOpen,
+    closeMobileSidebar,
     student,
     teacherTrainer,
     teacherActiveTab,
@@ -34,6 +37,16 @@ export const Sidebar = () => {
     setUserRole,
     showToast,
   } = useApp();
+
+  // Close the mobile drawer with the Escape key
+  useEffect(() => {
+    if (!isMobileSidebarOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeMobileSidebar();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileSidebarOpen, closeMobileSidebar]);
 
   const studentNavItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutGrid },
@@ -54,38 +67,73 @@ export const Sidebar = () => {
   const isTrainer = userRole === "trainer";
 
   return (
-    <aside
-      id="main-sidebar"
-      className={`relative flex flex-col justify-between h-screen transition-all duration-300 z-30 shrink-0 select-none border-r ${
-        sidebarCollapsed ? "w-20" : "w-[230px]"
-      }`}
-    >
-      {/* Brand Header */}
-      <div>
-        <div className="flex items-center  justify-between px-5 pt-6 pb-4">
-          {!sidebarCollapsed ? (
-            <div className="flex items-center gap-2">
+    <>
+      {/* Mobile Backdrop Overlay */}
+      <div
+        id="mobile-sidebar-backdrop"
+        onClick={closeMobileSidebar}
+        className={`fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          isMobileSidebarOpen
+            ? "opacity-100"
+            : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Sidebar: Off-canvas drawer on mobile, static rail on desktop */}
+      <aside
+        id="main-sidebar"
+        className={`fixed lg:relative inset-y-0 left-0 z-50 lg:z-30 flex flex-col justify-between h-dvh shrink-0 select-none border-r bg-[#0d0f13] transition-all duration-300 ease-in-out ${
+          isMobileSidebarOpen
+            ? "translate-x-0 w-[262px]"
+            : "-translate-x-full w-[262px]"
+        } lg:translate-x-0 ${sidebarCollapsed ? "lg:w-20" : "lg:w-[230px]"}`}
+      >
+        {/* Brand Header */}
+        <div>
+          <div className="flex items-center justify-between px-5 pt-6 pb-4">
+            {/* Brand: always expanded inside the mobile drawer */}
+            <div className="flex items-center lg:hidden">
               <SmitLogo size="normal" showSubtitle={true} />
             </div>
-          ) : (
-            <div className="mx-auto flex flex-col items-center">
-              <SmitLogo size="normal" showSubtitle={false} />
-            </div>
-          )}
 
-          <button
-            id="sidebar-toggle-btn"
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-1 rounded-md transition-colors cursor-pointer"
-            title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-          >
-            {sidebarCollapsed ? (
-              <ChevronRight className="w-4 h-4" />
-            ) : (
-              <ChevronLeft className="w-4 h-4" />
-            )}
-          </button>
-        </div>
+            {/* Brand: expands/collapses on desktop */}
+            <div className="hidden lg:block">
+              {sidebarCollapsed ? (
+                <div className="mx-auto flex flex-col items-center">
+                  <SmitLogo size="normal" showSubtitle={false} />
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <SmitLogo size="normal" showSubtitle={true} />
+                </div>
+              )}
+            </div>
+
+            {/* Mobile close button */}
+            <button
+              id="sidebar-close-mobile-btn"
+              onClick={closeMobileSidebar}
+              className="p-1.5 rounded-md transition-colors cursor-pointer lg:hidden"
+              title="Close menu"
+              aria-label="Close navigation menu"
+            >
+              <X className="w-4.5 h-4.5" />
+            </button>
+
+            {/* Desktop collapse toggle */}
+            <button
+              id="sidebar-toggle-btn"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="hidden lg:block p-1 rounded-md transition-colors cursor-pointer"
+              title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            >
+              {sidebarCollapsed ? (
+                <ChevronRight className="w-4 h-4" />
+              ) : (
+                <ChevronLeft className="w-4 h-4" />
+              )}
+            </button>
+          </div>
 
         {/* Portal Mode Tag */}
 
@@ -99,12 +147,15 @@ export const Sidebar = () => {
                   <button
                     key={item.id}
                     id={`trainer-nav-${item.id}`}
-                    onClick={() => setTeacherActiveTab(item.id)}
+                    onClick={() => {
+                      setTeacherActiveTab(item.id);
+                      closeMobileSidebar();
+                    }}
                     className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                       isActive
                         ? " border shadow-sm"
                         : ""
-                    } ${sidebarCollapsed ? "justify-center px-0" : ""}`}
+                    } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
                     title={sidebarCollapsed ? item.label : undefined}
                   >
                     <Icon
@@ -112,11 +163,9 @@ export const Sidebar = () => {
                         isActive ? "" : ""
                       }`}
                     />
-                    {!sidebarCollapsed && (
-                      <span className="tracking-wide text-[13.5px]">
-                        {item.label}
-                      </span>
-                    )}
+                    <span className={`tracking-wide text-[13.5px] ${sidebarCollapsed ? "lg:hidden" : ""}`}>
+                      {item.label}
+                    </span>
                   </button>
                 );
               })
@@ -127,12 +176,15 @@ export const Sidebar = () => {
                   <button
                     key={item.id}
                     id={`nav-${item.id}`}
-                    onClick={() => setActiveNav(item.id)}
-                    className={`w-full flex items-center gap-3.5 px-1.5 py-2.5 rounded-xl text-xl font-medium transition-colors cursor-pointer ${
+                    onClick={() => {
+                      setActiveNav(item.id);
+                      closeMobileSidebar();
+                    }}
+                    className={`w-full flex items-center gap-3.5 px-1.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                       isActive
                         ? " border shadow-sm"
                         : ""
-                    } ${sidebarCollapsed ? "justify-center px-0" : ""}`}
+                    } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
                     title={sidebarCollapsed ? item.label : undefined}
                   >
                     <Icon
@@ -140,11 +192,9 @@ export const Sidebar = () => {
                         isActive ? "" : ""
                       }`}
                     />
-                    {!sidebarCollapsed && (
-                      <span className="tracking-wide text-[14px]">
-                        {item.label}
-                      </span>
-                    )}
+                    <span className={`tracking-wide text-[14px] ${sidebarCollapsed ? "lg:hidden" : ""}`}>
+                      {item.label}
+                    </span>
                   </button>
                 );
               })}
@@ -156,24 +206,25 @@ export const Sidebar = () => {
         {/* Profile Card */}
         <div
           id="sidebar-user-profile"
-          onClick={() => setIsProfileOpen && setIsProfileOpen(true)}
+          onClick={() => {
+            setIsProfileOpen && setIsProfileOpen(true);
+            closeMobileSidebar();
+          }}
           className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors ${
-            sidebarCollapsed ? "justify-center" : "justify-between"
+            sidebarCollapsed ? "lg:justify-center" : "lg:justify-between"
           }`}
           title={isTrainer ? "View Faculty Details" : "View Student Profile"}
         >
-          {!sidebarCollapsed && (
-            <div className="truncate min-w-0">
-              <div className="font-semibold text-[14px] tracking-wide truncate">
-                {isTrainer ? teacherTrainer.name : student.name}
-              </div>
-              <div className="text-[11px] truncate">
-                {isTrainer
-                  ? "Lead Faculty"
-                  : student.rollNumber || student.rollNo}
-              </div>
+          <div className={`truncate min-w-0 ${sidebarCollapsed ? "lg:hidden" : ""}`}>
+            <div className="font-semibold text-[14px] tracking-wide truncate">
+              {isTrainer ? teacherTrainer.name : student.name}
             </div>
-          )}
+            <div className="text-[11px] truncate">
+              {isTrainer
+                ? "Lead Faculty"
+                : student.rollNumber || student.rollNo}
+            </div>
+          </div>
 
           <div className="relative shrink-0">
             <img
@@ -192,16 +243,20 @@ export const Sidebar = () => {
         <button
           id="sidebar-logout-btn"
           type="button"
-          onClick={logout}
+          onClick={() => {
+            logout();
+            closeMobileSidebar();
+          }}
           className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-            sidebarCollapsed ? "justify-center" : ""
+            sidebarCollapsed ? "lg:justify-center" : ""
           }`}
           title="Log out of SMIT Portal"
         >
           <LogOut className="w-3.5 h-3.5 shrink-0" />
-          {!sidebarCollapsed && <span>Log Out</span>}
+          <span className={sidebarCollapsed ? "lg:hidden" : ""}>Log Out</span>
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };

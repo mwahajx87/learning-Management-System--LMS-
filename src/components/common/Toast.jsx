@@ -10,10 +10,12 @@ export const Toast = () => {
   return (
     <div
       id="app-toast-alert"
-      className="fixed bg-[#0d0f13] bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 border rounded-xl shadow-2xl animate-fade-in transition-all"
+      className="fixed z-50 bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm bg-[#0d0f13] flex items-center gap-3 px-4 py-3 border rounded-xl shadow-2xl animate-fade-in transition-all"
     >
       <CheckCircle className="w-5 h-5 shrink-0" />
-      <span className="text-sm font-medium">{toastMessage}</span>
+      <span className="text-sm font-medium break-words min-w-0">
+        {toastMessage}
+      </span>
       <button
         id="toast-close-btn"
         onClick={() => setToastMessage(null)}

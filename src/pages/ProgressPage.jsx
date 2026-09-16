@@ -124,7 +124,7 @@ export const ProgressPage = () => {
               {/* Module Header Bar */}
               <div
                 onClick={() => toggleModule(module.id)}
-                className="flex items-center justify-between p-5 cursor-pointer transition-colors select-none"
+                className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer transition-colors select-none"
               >
                 {/* Left: Status Icon & Title & Subtitle */}
                 <div className="flex items-center gap-4">
@@ -168,7 +168,7 @@ export const ProgressPage = () => {
               </div>
 
               {isExpanded && (
-                <div className="px-5 pb-5 pt-2 border-t">
+                <div className="px-4 sm:px-5 pb-5 pt-2 border-t">
                   <div className="text-xs font-semibold py-2.5">
                     Topics in {module.title}:
                   </div>

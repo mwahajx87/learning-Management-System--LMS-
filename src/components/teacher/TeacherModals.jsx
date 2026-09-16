@@ -147,8 +147,8 @@ export const TeacherModals = () => {
     <>
       {/* 1. NEW ASSIGNMENT MODAL */}
       {isNewAssignmentOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
-          <div className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl p-4 sm:p-6 shadow-2xl relative max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
             <button
               type="button"
               onClick={() => setIsNewAssignmentOpen(false)}
@@ -356,8 +356,8 @@ export const TeacherModals = () => {
 
       {/* 3. ASSIGNMENT DETAILS & SUBMISSIONS INSPECTOR */}
       {selectedTeacherAssignment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-[#0d0f13] border w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="bg-[#0d0f13] border w-full max-w-2xl rounded-2xl p-4 sm:p-6 shadow-2xl relative max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
             <button
               type="button"
               onClick={() => setSelectedTeacherAssignment(null)}
@@ -452,8 +452,8 @@ export const TeacherModals = () => {
 
       {/* 4. STUDENT PROFILE INSPECTOR MODAL */}
       {selectedStudentForInspect && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
-          <div className="border bg-[#0d0f13] w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="border bg-[#0d0f13] w-full max-w-md rounded-2xl p-4 sm:p-6 shadow-2xl relative max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
             <button
               type="button"
               onClick={() => setSelectedStudentForInspect(null)}
@@ -537,8 +537,8 @@ export const TeacherModals = () => {
 
       {/* 5. QUIZ QUESTIONS & SCORES MODAL */}
       {isQuizQuestionsModalOpen && selectedTeacherQuiz && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">
-          <div className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl p-4 sm:p-6 shadow-2xl relative max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
             <button
               type="button"
               onClick={() => setIsQuizQuestionsModalOpen(false)}
@@ -598,8 +598,8 @@ export const TeacherModals = () => {
 
       {/* 6. NEW QUIZ MODAL */}
       {isNewQuizOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn">xxxxxxxxxx
-          <div className="border bg-[#0d0f13] w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="border bg-[#0d0f13] w-full max-w-md rounded-2xl p-4 sm:p-6 shadow-2xl relative max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
             <button
               type="button"
               onClick={() => setIsNewQuizOpen(false)}

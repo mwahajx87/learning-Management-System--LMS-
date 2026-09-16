@@ -34,8 +34,6 @@ const AppContent = () => {
         return <ProgressPage />;
       case "attendance":
         return <AttendancePage />;
-      case "payment":
-        return <PaymentPage />;
       case "assignment":
         return <AssignmentPage />;
       case "quiz":
@@ -49,13 +47,13 @@ const AppContent = () => {
   const isTrainer = userRole === "trainer";
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden font-sans select-text">
+    <div className="flex h-dvh w-screen overflow-hidden font-sans select-text">
       {/* Left Navigation Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-y-auto">
-        <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-8 flex flex-col min-h-full">
+        <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-full">
           {isTrainer ? (
             <>
             <TopBar />

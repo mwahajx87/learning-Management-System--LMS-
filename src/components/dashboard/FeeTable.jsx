@@ -12,7 +12,7 @@ export const FeeTable = () => {
         Fee
       </h3>
 
-      <div className="border rounded-2xl overflow-hidden shadow-sm">
+      <div className="hidden sm:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left  border-collapse">
             <thead>
@@ -76,6 +76,51 @@ export const FeeTable = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Fee Cards (mobile — stacked card layout) */}
+      <div className="sm:hidden space-y-3">
+        {feeRecords.slice(0, 1).map((record) => (
+          <div key={record.id} className="border rounded-2xl p-4 space-y-3">
+            {/* Month + Status */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="text-sm font-bold">{record.month}</div>
+              <StatusBadge status={record.status} />
+            </div>
+
+            {/* Details Grid */}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
+              <div>
+                <div className="mb-1">Amount</div>
+                <div className="font-semibold">{record.amount}</div>
+              </div>
+              <div>
+                <div className="mb-1">Type</div>
+                <div className="font-semibold">{record.type}</div>
+              </div>
+              <div>
+                <div className="mb-1">Due date</div>
+                <div className="font-semibold">{record.dueDate}</div>
+              </div>
+              <div className="min-w-0">
+                <div className="mb-1">Voucher ID</div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold font-mono break-all">
+                    {record.voucherId}
+                  </span>
+                  <button
+                    id="copy-voucher-btn"
+                    onClick={() => copyToClipboard(record.voucherId, 'Voucher ID')}
+                    className="p-1 rounded-md border transition-colors shrink-0"
+                    title="Copy Voucher ID"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

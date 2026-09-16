@@ -140,8 +140,8 @@ export const TeacherAttendanceTab = () => {
         </div>
       </div>
 
-      {/* Attendance Table */}
-      <div className="rounded-xl border overflow-hidden shadow-lg">
+      {/* Attendance Table (desktop) */}
+      <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -274,6 +274,125 @@ export const TeacherAttendanceTab = () => {
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Attendance Cards (mobile — stacked card layout) */}
+      <div className="md:hidden space-y-3">
+        {displayedStudents.map((st) => {
+          const currentStatus =
+            teacherAttendanceStatus[st.rollNumber] || "NOT MARKED";
+
+          return (
+            <div key={st.id} className="rounded-xl border p-4 space-y-3">
+              {/* Student Identity + Current Status */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <img
+                    src={st.avatar}
+                    alt={st.name}
+                    className="w-8 h-8 rounded-full object-cover border shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold truncate">
+                      {st.name}
+                    </div>
+                    <div className="text-xs font-mono">{st.rollNumber}</div>
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded border shrink-0">
+                  {currentStatus}
+                </span>
+              </div>
+
+              {/* Status Selector */}
+              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-lg border">
+                <button
+                  type="button"
+                  onClick={() => markStudentAttendance(st.rollNumber, "PRESENT")}
+                  className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
+                    currentStatus === "PRESENT" ? " border" : ""
+                  }`}
+                >
+                  PRESENT
+                </button>
+                <button
+                  type="button"
+                  onClick={() => markStudentAttendance(st.rollNumber, "ABSENT")}
+                  className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
+                    currentStatus === "ABSENT" ? " border" : ""
+                  }`}
+                >
+                  ABSENT
+                </button>
+                <button
+                  type="button"
+                  onClick={() => markStudentAttendance(st.rollNumber, "LEAVE")}
+                  className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
+                    currentStatus === "LEAVE" ? " border" : ""
+                  }`}
+                >
+                  LEAVE
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    markStudentAttendance(st.rollNumber, "NOT MARKED")
+                  }
+                  className={`px-2 py-1 rounded text-[10px] font-medium transition-colors ${
+                    currentStatus === "NOT MARKED" ? "border" : ""
+                  }`}
+                  title="Clear Status"
+                >
+                  NOT MARKED
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Pagination Controls (mobile) */}
+      <div className="md:hidden rounded-xl border px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div>
+          Showing {(currentPage - 1) * itemsPerPage + 1}-
+          {Math.min(currentPage * itemsPerPage, totalStudents)} of{" "}
+          {totalStudents} students
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md border disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+            <span>Previous</span>
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pg) => (
+            <button
+              key={`m-${pg}`}
+              type="button"
+              onClick={() => setCurrentPage(pg)}
+              className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
+                currentPage === pg ? "" : "border"
+              }`}
+            >
+              {pg}
+            </button>
+          ))}
+
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md border disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <span>Next</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </div>

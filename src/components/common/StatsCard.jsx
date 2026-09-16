@@ -11,7 +11,7 @@ export const StatsCard = ({
   return (
     <div
       id={id || `stats-card-${label.toLowerCase().replace(/\s+/g, '-')}`}
-      className="border rounded-2xl p-6 flex items-center justify-between"
+      className="border rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between gap-3"
     >
       <div>
         <div className="text-2xl sm:text-3xl font-bold tracking-tight">

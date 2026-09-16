@@ -26,8 +26,8 @@ export const QuizPage = () => {
         </ul>
       </div>
 
-      {/* Quizzes Table */}
-      <div className="border rounded-2xl overflow-hidden shadow-sm">
+      {/* Quizzes Table (desktop) */}
+      <div className="hidden md:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
@@ -122,9 +122,67 @@ export const QuizPage = () => {
         </div>
       </div>
 
+      {/* Quizzes Cards (mobile — stacked card layout) */}
+      <div className="md:hidden space-y-3">
+        {quizzes.map((quiz) => {
+          const isWarningAttempt = quiz.attempts.startsWith("2");
+
+          return (
+            <div key={quiz.id} className="border rounded-2xl p-4 space-y-3">
+              {/* Title + Status */}
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="text-sm font-bold truncate">
+                    {quiz.title}
+                  </div>
+                  <div className="text-xs mt-0.5">{quiz.module}</div>
+                </div>
+                <StatusBadge status={quiz.status} />
+              </div>
+
+              {/* Details Grid */}
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
+                <div>
+                  <div className="mb-1">Questions</div>
+                  <span className="inline-flex px-2.5 py-1 text-xs font-bold rounded-lg border">
+                    {quiz.questions}
+                  </span>
+                </div>
+                <div>
+                  <div className="mb-1">Percentage</div>
+                  <span className="font-bold">{quiz.percentage}</span>
+                </div>
+                <div>
+                  <div className="mb-1">Attempts</div>
+                  {isWarningAttempt ? (
+                    <span className="inline-flex px-2 py-0.5 rounded text-xs font-bold border">
+                      {quiz.attempts}
+                    </span>
+                  ) : (
+                    <span className="font-mono text-xs">{quiz.attempts}</span>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <div className="mb-1">Note</div>
+                  <span className="font-mono break-words">{quiz.note}</span>
+                </div>
+              </div>
+
+              {/* Full-width Action */}
+              <button
+                onClick={() => setSelectedQuiz(quiz)}
+                className="w-full px-4 py-2 rounded-lg text-xs font-semibold border transition-colors"
+              >
+                {quiz.action || "Completed"}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
       {/* Footer Support Note */}
-      <div className="flex items-center justify-center gap-2 text-xs pt-3">
-        <HelpCircle className="w-4 h-4" />
+      <div className="flex flex-wrap items-center justify-center gap-2 text-xs pt-3 px-4 text-center">
+        <HelpCircle className="w-4 h-4 shrink-0" />
         <span>
           Contact your instructor if you have any issues accessing your quizzes.
         </span>
