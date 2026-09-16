@@ -1,20 +1,16 @@
-import React from 'react';
-import { Calendar } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import React from "react";
+import { Calendar } from "lucide-react";
+import { useApp } from "../../context/AppContext";
 
 export const ScheduleWidget = () => {
-  const { scheduleDays, selectedScheduleDay, setSelectedScheduleDay } = useApp();
+  const { scheduleDays, selectedScheduleDay, setSelectedScheduleDay } =
+    useApp();
 
   return (
-    <div
-      id="class-schedule-widget"
-      className="border rounded-2xl p-5"
-    >
+    <div id="class-schedule-widget" className="border rounded-2xl p-5">
       <div className="flex items-center gap-2 mb-4">
         <Calendar className="w-4 h-4" />
-        <h3 className="text-base font-bold tracking-normal">
-          Class Schedule
-        </h3>
+        <h3 className="text-base font-bold tracking-normal">Class Schedule</h3>
       </div>
 
       {/* Horizontal Date Selector */}
@@ -30,24 +26,22 @@ export const ScheduleWidget = () => {
               onClick={() => setSelectedScheduleDay(item.date)}
               className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl transition-all cursor-pointer ${
                 isClassDay
-                  ? ' font-semibold'
+                  ? "font-semibold bg-white text-black"
                   : isSelected
-                  ? ' ring-1'
-                  : ''
+                    ? `${isClassDay ? "ring-black ring-1" : "ring-white ring-1"}`
+                    : ""
               }`}
             >
               <span
                 className={`text-[11px] uppercase tracking-tight ${
-                  isClassDay ? 'font-semibold' : ''
+                  isClassDay ? "font-semibold" : ""
                 }`}
               >
                 {item.day}
               </span>
               <span
                 className={`text-sm mt-0.5 ${
-                  isClassDay
-                    ? 'font-bold'
-                    : 'font-bold'
+                  isClassDay ? "font-bold" : "font-bold"
                 }`}
               >
                 {item.date}
@@ -62,7 +56,7 @@ export const ScheduleWidget = () => {
         {scheduleDays.find((d) => d.date === selectedScheduleDay)?.hasClass ? (
           <div className="flex items-center justify-between">
             <span className="font-semibold">Live Lecture & Lab Practice</span>
-                  <span className="text-[11px] font-mono">01:00 PM – 03:00 PM</span>
+            <span className="text-[11.5px] font-mono">01:00 PM – 03:00 PM</span>
           </div>
         ) : (
           <div className="flex items-center justify-between">

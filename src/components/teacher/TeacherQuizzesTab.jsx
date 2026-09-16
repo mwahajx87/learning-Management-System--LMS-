@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { Eye, FileText, Plus, CheckCircle2, ToggleLeft, ToggleRight } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import React, { useState } from "react";
+import {
+  Eye,
+  FileText,
+  Plus,
+  CheckCircle2,
+  ToggleLeft,
+  ToggleRight,
+} from "lucide-react";
+import { useApp } from "../../context/AppContext";
 
 export const TeacherQuizzesTab = () => {
   const {
     teacherQuizzes,
     toggleQuizStatus,
     setSelectedTeacherQuiz,
-    setIsQuizQuestionsModalOpen,
-    setIsNewQuizOpen
+    setIsNewQuizOpen,
   } = useApp();
 
   return (
@@ -16,8 +22,13 @@ export const TeacherQuizzesTab = () => {
       {/* Top Header Bar */}
       <div className="flex items-center justify-between p-4 rounded-xl border">
         <div>
-          <h2 className="text-sm font-semibold">Course Quizzes & Assessments</h2>
-          <p className="text-xs">Control quiz visibility, configure time windows, and evaluate class performance</p>
+          <h2 className="text-sm font-semibold">
+            Course Quizzes & Assessments
+          </h2>
+          <p className="text-xs">
+            Control quiz visibility, configure time windows, and evaluate class
+            performance
+          </p>
         </div>
 
         <button
@@ -41,16 +52,17 @@ export const TeacherQuizzesTab = () => {
                 <th className="py-3.5 px-4 sm:px-6 w-[36%]">Course(s)</th>
                 <th className="py-3.5 px-4 sm:px-6 w-[13%]">Date</th>
                 <th className="py-3.5 px-4 sm:px-6 w-[13%]">Expiry</th>
-                <th className="py-3.5 px-4 sm:px-6 text-center w-[10%]">Status</th>
-                <th className="py-3.5 px-4 sm:px-6 text-center w-[8%]">Action</th>
+                <th className="py-3.5 px-4 sm:px-6 text-center w-[90%]">
+                  Status
+                </th>
+                <th className="py-3.5 px-4 sm:px-6 text-center w-[8%]">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y text-xs">
               {teacherQuizzes.map((q) => (
-                <tr
-                  key={q.id}
-                  className="transition-colors group"
-                >
+                <tr key={q.id} className="transition-colors group">
                   {/* Quiz Name */}
                   <td className="py-3.5 px-4 sm:px-6 align-top">
                     <span className="font-semibold transition-colors">
@@ -59,7 +71,7 @@ export const TeacherQuizzesTab = () => {
                   </td>
 
                   {/* Course(s) */}
-                  <td className="py-3.5 px-4 sm:px-6 align-top leading-relaxed">
+                  <td className="py-3.5 w-[50%] px-4 sm:px-6 align-top leading-relaxed">
                     {q.courses}
                   </td>
 
@@ -74,12 +86,10 @@ export const TeacherQuizzesTab = () => {
                   </td>
 
                   {/* Status Badge */}
-                  <td className="py-3.5 px-4 sm:px-6 align-top text-center">
+                  <td className="py-3.5 align-top text-center">
                     <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${
-                        q.isActive
-                          ? ' border'
-                          : ' border'
+                      className={`inline-flex items-center  text-center px-1.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${
+                        q.isActive ? " border" : " border"
                       }`}
                     >
                       {q.status}
@@ -94,30 +104,19 @@ export const TeacherQuizzesTab = () => {
                         type="button"
                         onClick={() => toggleQuizStatus(q.id)}
                         className={`p-1 transition-colors rounded ${
-                          q.isActive
-                            ? ''
-                            : ''
+                          q.isActive ? "" : ""
                         }`}
-                        title={q.isActive ? 'Active (Click to Deactivate)' : 'Inactive (Click to Activate)'}
+                        title={
+                          q.isActive
+                            ? "Active (Click to Deactivate)"
+                            : "Inactive (Click to Activate)"
+                        }
                       >
                         {q.isActive ? (
                           <ToggleRight className="w-5 h-5" />
                         ) : (
                           <ToggleLeft className="w-5 h-5" />
                         )}
-                      </button>
-
-                      {/* Question List View */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedTeacherQuiz(q);
-                          setIsQuizQuestionsModalOpen(true);
-                        }}
-                        className="p-1 rounded transition-colors"
-                        title="View Question Bank"
-                      >
-                        <FileText className="w-4 h-4" />
                       </button>
 
                       {/* Attempts & Scores */}

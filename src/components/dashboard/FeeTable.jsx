@@ -14,25 +14,25 @@ export const FeeTable = () => {
 
       <div className="border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left  border-collapse">
             <thead>
               <tr className="border-b">
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Month
                 </th>
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Amount
                 </th>
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Type
                 </th>
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Due date
                 </th>
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Voucher ID
                 </th>
-                <th className="py-4 px-6 text-sm font-normal">
+                <th className="py-4 px-2 text-sm font-normal">
                   Status
                 </th>
               </tr>
@@ -43,19 +43,19 @@ export const FeeTable = () => {
                   key={record.id}
                   className="transition-colors"
                 >
-                  <td className="py-4 px-6 text-sm font-medium whitespace-nowrap">
+                  <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     {record.month}
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium whitespace-nowrap">
+                  <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     {record.amount}
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium whitespace-nowrap">
+                  <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     {record.type}
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium whitespace-nowrap">
+                  <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     {record.dueDate}
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium whitespace-nowrap">
+                  <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     <div className="flex items-center gap-2">
                       <span>{record.voucherId}</span>
                       <button
@@ -68,7 +68,7 @@ export const FeeTable = () => {
                       </button>
                     </div>
                   </td>
-                  <td className="py-4 px-6 whitespace-nowrap">
+                  <td className="py-4 px-2 whitespace-nowrap">
                     <StatusBadge status={record.status} />
                   </td>
                 </tr>

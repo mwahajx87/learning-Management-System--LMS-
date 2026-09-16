@@ -80,9 +80,9 @@ export const AttendancePage = () => {
         </div>
 
         {/* Orange Progress Bar */}
-        <div className="w-full h-2 rounded-full overflow-hidden mt-4">
+        <div className="w-full h-2 rounded-full border overflow-hidden mt-4">
           <div
-            className="h-full rounded-full transition-all duration-500"
+            className="h-full rounded-full bg-white transition-all duration-500"
             style={{ width: `${attendanceSummary.percentage}%` }}
           />
         </div>

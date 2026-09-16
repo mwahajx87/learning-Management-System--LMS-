@@ -12,7 +12,7 @@ export const CourseCard = () => {
     >
       <div className="p-6">
         <div className="flex flex-wrap items-center  justify-between gap-3 mb-4">
-          <h2 className="text-xl font-bold tracking-normal">
+          <h2 className="text-2xl font-bold tracking-tight">
             {courseDetails.title}
           </h2>
           <span
@@ -34,59 +34,54 @@ export const CourseCard = () => {
           ))}
         </div>
       </div>
-      <div className="p-6">
-        <div className="mb-6">
-          <div className="flex justify-between items-center text-xs mb-2">
-            <span>Progress</span>
-            <span className="font-medium">
-              {courseDetails.progressPercentage}% Completed
-            </span>
-          </div>
-          <div className="w-full h-2 rounded-full overflow-hidden">
-            <div
-              className="h-full rounded-full transition-all duration-500"
-              style={{ width: `${courseDetails.progressPercentage}%` }}
-            />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 text-xs">
-          <div className="flex items-center gap-2">
-            <Hash className="w-3.5 h-3.5" />
-            <div>
-              <span>Batch: </span>
-              <span className="font-semibold">
-                {courseDetails.batch}
+      <div className="border-t border-gray-300" />
+      <div className="px-6 py-5">
+        <div className="mb-6 flex flex-col gap-5">
+          <div>
+            <div className="flex justify-between items-center text-sm mb-2">
+              <span>Progress</span>
+              <span className="font-medium ">
+                {courseDetails.progressPercentage}% Completed
               </span>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <User className="w-3.5 h-3.5" />
-            <div>
-              <span>Roll: </span>
-              <span className="font-semibold">
-                {courseDetails.roll}
-              </span>
+            <div className="w-full h-2 border rounded-full overflow-hidden">
+              <div
+                className="h-full bg-white rounded-full transition-all duration-500"
+                style={{ width: `${courseDetails.progressPercentage}%` }}
+              />
             </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <MapPin className="w-3.5 h-3.5 shrink-0" />
-            <div className="truncate">
-              <span>Campus: </span>
-              <span className="font-semibold">
-                {courseDetails.campus}
-              </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 text-sm">
+            <div className="flex items-center gap-2">
+              <Hash className="w-3.5 h-3.5" />
+              <div>
+                <span className="font-semibold">Batch: </span>
+                <span>{courseDetails.batch}</span>
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <Navigation className="w-3.5 h-3.5" />
-            <div>
-              <span>City: </span>
-              <span className="font-semibold">
-                {courseDetails.city}
-              </span>
+            <div className="flex items-center gap-2">
+              <User className="w-3.5 h-3.5" />
+              <div>
+                <span className="font-semibold">Roll: </span>
+                <span>{courseDetails.roll}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <div className="truncate">
+                <span className="font-semibold">Campus: </span>
+                <span>{courseDetails.campus}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Navigation className="w-3.5 h-3.5" />
+              <div>
+                <span className="font-semibold">City: </span>
+                <span>{courseDetails.city}</span>
+              </div>
             </div>
           </div>
         </div>

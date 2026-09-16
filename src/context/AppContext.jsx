@@ -1219,8 +1219,7 @@ export const AppProvider = ({ children }) => {
   const [selectedStudentForInspect, setSelectedStudentForInspect] =
     useState(null);
   const [selectedTeacherQuiz, setSelectedTeacherQuiz] = useState(null);
-  const [isQuizQuestionsModalOpen, setIsQuizQuestionsModalOpen] =
-    useState(false);
+
   const [isNewQuizOpen, setIsNewQuizOpen] = useState(false);
 
   // Attendance Actions
@@ -1405,8 +1404,6 @@ export const AppProvider = ({ children }) => {
         setSelectedStudentForInspect,
         selectedTeacherQuiz,
         setSelectedTeacherQuiz,
-        isQuizQuestionsModalOpen,
-        setIsQuizQuestionsModalOpen,
         isNewQuizOpen,
         setIsNewQuizOpen,
       }}

@@ -93,8 +93,6 @@ export const ProgressPage = () => {
           value={progressSummary.totalTopics}
           label="Total Topics"
           icon={Smartphone}
-         
-         
         />
 
         <StatsCard
@@ -102,8 +100,6 @@ export const ProgressPage = () => {
           value={progressSummary.completedTopics}
           label="Completed Topics"
           icon={GraduationCap}
-         
-         
         />
 
         <StatsCard
@@ -111,12 +107,9 @@ export const ProgressPage = () => {
           value={progressSummary.pendingTopics}
           label="Pending Topics"
           icon={Clock}
-         
-         
         />
       </div>
 
-      {/* 3. Module Cards List matching progress page.png and progress full page.png */}
       <div className="space-y-4">
         {progressModules.map((module) => {
           const isExpanded = expandedModules.includes(module.id);
@@ -137,9 +130,7 @@ export const ProgressPage = () => {
                 <div className="flex items-center gap-4">
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center border shrink-0 ${
-                      isCompleted
-                        ? ""
-                        : ""
+                      isCompleted ? "" : ""
                     }`}
                   >
                     {isCompleted ? (
@@ -176,7 +167,6 @@ export const ProgressPage = () => {
                 </div>
               </div>
 
-              {/* Expanded Topic Cards List matching progress full page.png */}
               {isExpanded && (
                 <div className="px-5 pb-5 pt-2 border-t">
                   <div className="text-xs font-semibold py-2.5">
@@ -196,7 +186,7 @@ export const ProgressPage = () => {
                               e.stopPropagation();
                               toggleTopicCompletion(module.id, topic.name);
                             }}
-                            className="p-1 rounded-lg transition-transform active:scale-90 mt-0.5 shrink-0"
+                            className="p-1 rounded-lg  transition-transform active:scale-90 mt-0.5 shrink-0"
                             title={
                               topic.completed
                                 ? "Click to mark as pending"
@@ -211,25 +201,27 @@ export const ProgressPage = () => {
                           </button>
 
                           <div className="flex-1 min-w-0">
-                            <div className="text-sm font-semibold leading-snug">
-                              {topic.name}
-                            </div>
-
-                            {topic.date && (
-                              <div className="text-[11px] mt-0.5">
-                                Completed: {topic.date}
+                            <div>
+                              <div className="text-sm font-semibold leading-snug">
+                                {topic.name}
                               </div>
-                            )}
+
+                              {topic.date && (
+                                <div className="text-[11px] mt-0.5">
+                                  Completed: {topic.date}
+                                </div>
+                              )}
+                            </div>
 
                             {/* Linked Assignments List */}
                             {topic.coveredIn && topic.coveredIn.length > 0 && (
-                              <div className="mt-2 space-y-1 text-xs">
+                              <div className="mt-2 border border-l-3 rounded-xl py-4 space-y-1 text-xs">
                                 {topic.coveredIn.map((item, idx) => (
                                   <div
                                     key={idx}
-                                    className="flex items-center gap-1.5"
+                                    className="flex items-center gap-2 px-3 "
                                   >
-                                    <span className="w-1 h-1 rounded-full shrink-0"></span>
+                                    <div className="w-1.5 h-1.5 bg-white  rounded-full"></div>
                                     <span>{item}</span>
                                   </div>
                                 ))}
