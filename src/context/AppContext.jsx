@@ -1073,21 +1073,30 @@ export const AppProvider = ({ children }) => {
     }, 3500);
   };
 
-  const toggleTopicCompletion = (moduleId, topicName) => {
+  const toggleTopicCompletion = (moduleId, topicIdentifier) => {
     setProgressModules((prev) =>
       prev.map((mod) => {
         if (mod.id !== moduleId) return mod;
-        let toggledTo = false;
-        const updatedTopics = mod.topics.map((t) => {
-          if (t.name === topicName) {
-            toggledTo = !t.completed;
-            return {
-              ...t,
-              completed: toggledTo,
-              date: toggledTo ? "Just now" : null,
-            };
-          }
-          return t;
+
+        const targetTopic =
+          typeof topicIdentifier === "number"
+            ? mod.topics[topicIdentifier]
+            : mod.topics.find((t) => t.name === topicIdentifier);
+
+        const toggledTo = targetTopic ? !targetTopic.completed : false;
+        const updatedTopics = mod.topics.map((t, index) => {
+          const matches =
+            typeof topicIdentifier === "number"
+              ? index === topicIdentifier
+              : t.name === topicIdentifier;
+
+          if (!matches) return t;
+
+          return {
+            ...t,
+            completed: toggledTo,
+            date: toggledTo ? "Just now" : null,
+          };
         });
 
         const completedCount = updatedTopics.filter((t) => t.completed).length;
@@ -1095,6 +1104,7 @@ export const AppProvider = ({ children }) => {
           (completedCount / updatedTopics.length) * 100,
         );
 
+        const topicName = targetTopic?.name ?? String(topicIdentifier);
         showToast(
           `Topic "${topicName}" marked as ${toggledTo ? "completed" : "pending"}.`,
         );

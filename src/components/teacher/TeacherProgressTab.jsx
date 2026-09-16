@@ -15,7 +15,7 @@ export const TeacherProgressTab = () => {
   const { progressModules, toggleTopicCompletion, teacherTrainer } = useApp();
   const [expandedModules, setExpandedModules] = useState({
     "mod-1": false,
-    "mod-2": true,
+    "mod-2": false,
     "mod-3": false,
     "mod-4": false,
   });
@@ -205,12 +205,7 @@ export const TeacherProgressTab = () => {
                         mod.topics.map((tpc, idx) => (
                           <div
                             key={idx}
-                            onClick={() => {
-                              toggleTopicCompletion(mod.id, idx);
-                              !tpc.completed
-                                ? (tpc.completed = true)
-                                : (tpc.completed = false);
-                            }}
+                            onClick={() => toggleTopicCompletion(mod.id, tpc.name)}
                             className={`flex items-start gap-2.5 p-2.5 rounded-lg border transition-all cursor-pointer ${
                               tpc.completed ? "" : ""
                             }`}
