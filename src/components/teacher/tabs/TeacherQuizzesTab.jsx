@@ -7,7 +7,7 @@ import {
   ToggleLeft,
   ToggleRight,
 } from "lucide-react";
-import { useApp } from "../../context/AppContext";
+import { useTeacher } from "../../../context/TeacherContext";
 
 export const TeacherQuizzesTab = () => {
   const {
@@ -15,7 +15,7 @@ export const TeacherQuizzesTab = () => {
     toggleQuizStatus,
     setSelectedTeacherQuiz,
     setIsNewQuizOpen,
-  } = useApp();
+  } = useTeacher();
 
   return (
     <div className="flex flex-col gap-4">

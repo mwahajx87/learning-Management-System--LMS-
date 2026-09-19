@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApp } from '../../context/AppContext';
+import { useStudent } from '../../../context/StudentContext';
 import { ExternalLink, CalendarDays, Award } from 'lucide-react';
 
 export const SubTabsWidget = () => {
@@ -11,7 +11,7 @@ export const SubTabsWidget = () => {
     setSelectedAssignment,
     setSelectedQuiz,
     setActiveNav
-  } = useApp();
+  } = useStudent();
 
   const tabs = [
     { id: 'assignments', label: 'Assignments' },

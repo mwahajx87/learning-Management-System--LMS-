@@ -9,10 +9,14 @@ import {
   Calendar,
   Check,
 } from "lucide-react";
-import { useApp } from "../../context/AppContext";
+import { useStudent } from "../../../context/StudentContext";
+import { useTeacher } from "../../../context/TeacherContext";
 
 export const TeacherProgressTab = () => {
-  const { progressModules, toggleTopicCompletion, teacherTrainer } = useApp();
+  // Course curriculum topics come from the student (shared) context
+  const { progressModules, toggleTopicCompletion } = useStudent();
+  // Trainer profile comes from the teacher context
+  const { teacherTrainer } = useTeacher();
   const [expandedModules, setExpandedModules] = useState({
     "mod-1": false,
     "mod-2": false,

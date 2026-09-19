@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Eye, Edit3, ChevronLeft, ChevronRight, Tag } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useTeacher } from '../../../context/TeacherContext';
 
 export const TeacherAssignmentsTab = () => {
   const {
@@ -8,7 +8,7 @@ export const TeacherAssignmentsTab = () => {
     setIsNewAssignmentOpen,
     setSelectedTeacherAssignment,
     setEditingTeacherAssignment
-  } = useApp();
+  } = useTeacher();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;

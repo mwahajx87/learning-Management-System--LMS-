@@ -1,10 +1,12 @@
 import React from 'react';
 import { Copy } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
-import { StatusBadge } from '../common/StatusBadge';
+import { useApp } from '../../../context/AppContext';
+import { useStudent } from '../../../context/StudentContext';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const FeeTable = () => {
-  const { feeRecords, copyToClipboard } = useApp();
+  const { feeRecords } = useStudent();
+  const { copyToClipboard } = useApp();
 
   return (
     <div id="dashboard-fee-section" className="space-y-3">

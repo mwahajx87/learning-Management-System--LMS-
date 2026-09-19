@@ -5,9 +5,9 @@ import {
   XCircle,
   ChevronDown
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { StatsCard } from '../components/common/StatsCard';
-import { StatusBadge } from '../components/common/StatusBadge';
+import { useStudent } from '../../../context/StudentContext';
+import { StatsCard } from '../../common/StatsCard';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const AttendancePage = () => {
   const {
@@ -15,7 +15,7 @@ export const AttendancePage = () => {
     selectedAttendanceMonth,
     setSelectedAttendanceMonth,
     attendanceRecords
-  } = useApp();
+  } = useStudent();
 
   const currentRecords = attendanceRecords[selectedAttendanceMonth] || [];
 

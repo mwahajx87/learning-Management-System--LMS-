@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { X, Upload, Github, Globe, FileText } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../../context/AppContext';
+import { useStudent } from '../../../context/StudentContext';
 
 export const SubmitAssignmentModal = () => {
-  const { editingAssignment, setEditingAssignment, handleAssignmentSubmit, showToast } = useApp();
+  const { editingAssignment, setEditingAssignment, handleAssignmentSubmit } = useStudent();
+  const { showToast } = useApp();
 
   const [liveUrl, setLiveUrl] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
@@ -13,7 +15,6 @@ export const SubmitAssignmentModal = () => {
     if (editingAssignment) {
       setLiveUrl(editingAssignment.submissionLink || '');
       setNotes(editingAssignment.submissionNotes || '');
-      // Try extracting github repo if present in notes
       if (editingAssignment.submissionNotes && editingAssignment.submissionNotes.includes('https://github.com')) {
         const match = editingAssignment.submissionNotes.match(/https:\/\/github\.com[^\s]+/);
         if (match) setGithubUrl(match[0]);
@@ -127,14 +128,14 @@ export const SubmitAssignmentModal = () => {
             <button
               type="button"
               onClick={() => setEditingAssignment(null)}
-              className="px-4 py-2 text-xs font-semibold rounded-xl transition-colors"
+              className="px-4 py-2 border text-xs font-semibold rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               id="submit-assignment-confirm-btn"
-              className="px-5 py-2 text-xs font-bold rounded-xl transition-colors flex items-center gap-2 shadow-sm"
+              className="px-5 border py-2 text-xs font-bold rounded-xl transition-colors flex items-center gap-2 shadow-sm"
             >
               <Upload className="w-4 h-4" />
               <span>Confirm Submission</span>

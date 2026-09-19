@@ -7,7 +7,6 @@ export const SmitLogo = ({ size = 'normal', showSubtitle = true }) => {
   return (
     <div className="flex flex-col items-center select-none">
       <div className="relative flex items-center">
-        {/* Mortarboard Hat tilted over S and M */}
         <div
           className={`absolute ${
             isLarge
@@ -22,10 +21,9 @@ export const SmitLogo = ({ size = 'normal', showSubtitle = true }) => {
           />
         </div>
 
-        {/* SMIT Colored Letters */}
         <div
           className={`flex items-baseline font-black tracking-normal ${
-            isLarge ? 'text-4xl' : 'text-2xl'
+            isLarge ? 'text-4xl' : 'text-[15px]'
           }`}
           style={{ fontFamily: "'Signika', sans-serif" }}
         >

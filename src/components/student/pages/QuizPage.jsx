@@ -1,10 +1,10 @@
 import React from "react";
 import { AlertTriangle, HelpCircle } from "lucide-react";
-import { useApp } from "../context/AppContext";
-import { StatusBadge } from "../components/common/StatusBadge";
+import { useStudent } from "../../../context/StudentContext";
+import { StatusBadge } from "../../common/StatusBadge";
 
 export const QuizPage = () => {
-  const { quizzes, setSelectedQuiz } = useApp();
+  const { quizzes, setSelectedQuiz } = useStudent();
 
   return (
     <div id="quiz-page-container" className="space-y-6 animate-fade-in pb-12">

@@ -7,8 +7,8 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { useApp } from "../context/AppContext";
-import { StatsCard } from "../components/common/StatsCard";
+import { useStudent } from "../../../context/StudentContext";
+import { StatsCard } from "../../common/StatsCard";
 
 // Pixel-perfect SVG Circular Progress Indicator matching progress page.png
 const CircularProgress = ({ percentage }) => {
@@ -62,7 +62,7 @@ const CircularProgress = ({ percentage }) => {
 };
 
 export const ProgressPage = () => {
-  const { progressSummary, progressModules, toggleTopicCompletion } = useApp();
+  const { progressSummary, progressModules, toggleTopicCompletion } = useStudent();
 
   // Expanded modules state: toggles accordion items (collapsed by default to match screenshot)
   const [expandedModules, setExpandedModules] = useState([]);

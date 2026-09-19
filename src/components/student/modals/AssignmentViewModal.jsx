@@ -1,10 +1,10 @@
 import React from 'react';
 import { X, Calendar, Link2, ExternalLink, FileEdit } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
-import { StatusBadge } from '../common/StatusBadge';
+import { useStudent } from '../../../context/StudentContext';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const AssignmentViewModal = () => {
-  const { selectedAssignment, setSelectedAssignment, setEditingAssignment } = useApp();
+  const { selectedAssignment, setSelectedAssignment, setEditingAssignment } = useStudent();
 
   if (!selectedAssignment) return null;
 
@@ -178,7 +178,7 @@ export const AssignmentViewModal = () => {
                       setSelectedAssignment(null);
                       setEditingAssignment(asg);
                     }}
-                    className="px-3.5 py-1.5 font-medium text-xs rounded-lg transition-colors"
+                    className="px-3.5 border py-1.5 font-medium text-xs rounded-lg transition-colors"
                   >
                     Submit Assignment Now
                   </button>
@@ -193,7 +193,7 @@ export const AssignmentViewModal = () => {
           <button
             id="close-assignment-modal-footer-btn"
             onClick={() => setSelectedAssignment(null)}
-            className="px-6 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm"
+            className="px-6 py-2 border rounded-lg text-sm font-medium transition-colors shadow-sm"
           >
             Close
           </button>

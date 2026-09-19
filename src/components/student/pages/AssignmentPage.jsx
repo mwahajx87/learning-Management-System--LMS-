@@ -9,12 +9,12 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { StatsCard } from '../components/common/StatsCard';
-import { StatusBadge } from '../components/common/StatusBadge';
+import { useStudent } from '../../../context/StudentContext';
+import { StatsCard } from '../../common/StatsCard';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const AssignmentPage = () => {
-  const { assignments, setSelectedAssignment, setEditingAssignment } = useApp();
+  const { assignments, setSelectedAssignment, setEditingAssignment } = useStudent();
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);

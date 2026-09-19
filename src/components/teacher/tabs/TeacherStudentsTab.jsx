@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Search, Eye, ChevronLeft, ChevronRight, CheckCircle2, Copy } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../../context/AppContext';
+import { useTeacher } from '../../../context/TeacherContext';
 
 export const TeacherStudentsTab = () => {
-  const { teacherStudents, setSelectedStudentForInspect, copyToClipboard } = useApp();
+  const { teacherStudents, setSelectedStudentForInspect } = useTeacher();
+  const { copyToClipboard } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [currentPage, setCurrentPage] = useState(1);

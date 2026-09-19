@@ -14,9 +14,11 @@ import {
   Sparkles,
   BarChart3
 } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../../context/AppContext';
+import { useTeacher } from '../../../context/TeacherContext';
 
 export const TeacherModals = () => {
+  // Teacher portal state & actions
   const {
     // New Assignment
     isNewAssignmentOpen,
@@ -36,7 +38,6 @@ export const TeacherModals = () => {
     // Inspect Student
     selectedStudentForInspect,
     setSelectedStudentForInspect,
-    copyToClipboard,
 
     // Quiz Modals
     selectedTeacherQuiz,
@@ -49,7 +50,10 @@ export const TeacherModals = () => {
 
     // Class Students
     teacherStudents
-  } = useApp();
+  } = useTeacher();
+
+  // App-level helpers (clipboard + toast)
+  const { copyToClipboard } = useApp();
 
   // New Assignment Form State
   const [newTitle, setNewTitle] = useState('');
@@ -232,13 +236,13 @@ export const TeacherModals = () => {
                 <button
                   type="button"
                   onClick={() => setIsNewAssignmentOpen(false)}
-                  className="px-4 py-2 rounded-lg transition-colors"
+                  className="px-4 py-2 border rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg font-semibold shadow-md transition-all"
+                  className="px-4 py-2 border rounded-lg font-semibold shadow-md transition-all"
                 >
                   Publish Assignment
                 </button>
@@ -337,13 +341,13 @@ export const TeacherModals = () => {
                   <button
                     type="button"
                     onClick={() => setEditingTeacherAssignment(null)}
-                    className="px-4 py-2 rounded-lg transition-colors"
+                    className="px-4 py-2 border rounded-lg transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 rounded-lg font-semibold transition-colors"
+                    className="px-4 py-2 border rounded-lg font-semibold transition-colors"
                   >
                     Save Changes
                   </button>
@@ -441,7 +445,7 @@ export const TeacherModals = () => {
               <button
                 type="button"
                 onClick={() => setSelectedTeacherAssignment(null)}
-                className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+                className="px-4 py-2 border rounded-lg text-xs font-semibold transition-colors"
               >
                 Close Inspector
               </button>
@@ -527,7 +531,7 @@ export const TeacherModals = () => {
             <button
               type="button"
               onClick={() => setSelectedStudentForInspect(null)}
-              className="w-full py-2.5 rounded-xl text-xs font-semibold transition-colors"
+              className="w-full py-2.5 border rounded-xl text-xs font-semibold transition-colors"
             >
               Close Student Card
             </button>
@@ -587,7 +591,7 @@ export const TeacherModals = () => {
               <button
                 type="button"
                 onClick={() => setIsQuizQuestionsModalOpen(false)}
-                className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+                className="px-4 py-2 border rounded-lg text-xs font-semibold transition-colors"
               >
                 Close Question Bank
               </button>
@@ -660,13 +664,13 @@ export const TeacherModals = () => {
                 <button
                   type="button"
                   onClick={() => setIsNewQuizOpen(false)}
-                  className="px-4 py-2 rounded-lg transition-colors"
+                  className="px-4 py-2 border rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg font-semibold transition-colors"
+                  className="px-4 border py-2 rounded-lg font-semibold transition-colors"
                 >
                   Activate Quiz
                 </button>

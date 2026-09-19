@@ -1,18 +1,18 @@
 import React from 'react';
 import { Clock, GraduationCap } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { StatsCard } from '../components/common/StatsCard';
-import { CourseCard } from '../components/dashboard/CourseCard';
-import { ScheduleWidget } from '../components/dashboard/ScheduleWidget';
-import { SubTabsWidget } from '../components/dashboard/SubTabsWidget';
-import { FeeTable } from '../components/dashboard/FeeTable';
+import { useStudent } from '../../../context/StudentContext';
+import { StatsCard } from '../../common/StatsCard';
+import { CourseCard } from '../widgets/CourseCard';
+import { ScheduleWidget } from '../widgets/ScheduleWidget';
+import { SubTabsWidget } from '../widgets/SubTabsWidget';
+import { FeeTable } from '../widgets/FeeTable';
 
 export const DashboardPage = () => {
   const {
     attendanceSummary,
     assignments,
     setActiveNav
-  } = useApp();
+  } = useStudent();
 
   const submittedAssignmentsCount = assignments.filter(
     (a) => a.status === 'SUBMITTED' || a.status === 'APPROVED'

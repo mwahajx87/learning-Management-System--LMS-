@@ -16,27 +16,31 @@ import {
   X,
 } from "lucide-react";
 import { useApp } from "../../context/AppContext";
+import { useStudent } from "../../context/StudentContext";
+import { useTeacher } from "../../context/TeacherContext";
 import avatarImg from "../../assets/images/student_avatar_1789503254707.jpg";
-import { SmitLogo } from "../common/SmitLogo";
+import { SmitLogo } from "./SmitLogo";
 
 export const Sidebar = () => {
+  // App-level state (auth, role, sidebar, toast, profile modal)
   const {
-    activeNav,
-    setActiveNav,
     sidebarCollapsed,
     setSidebarCollapsed,
     isMobileSidebarOpen,
     closeMobileSidebar,
-    student,
-    teacherTrainer,
-    teacherActiveTab,
-    setTeacherActiveTab,
     setIsProfileOpen,
     logout,
     userRole,
     setUserRole,
     showToast,
   } = useApp();
+
+  // Student portal state
+  const { activeNav, setActiveNav, student } = useStudent();
+
+  // Teacher portal state
+  const { teacherTrainer, teacherActiveTab, setTeacherActiveTab } =
+    useTeacher();
 
   // Close the mobile drawer with the Escape key
   useEffect(() => {
@@ -79,7 +83,6 @@ export const Sidebar = () => {
         }`}
       />
 
-      {/* Sidebar: Off-canvas drawer on mobile, static rail on desktop */}
       <aside
         id="main-sidebar"
         className={`fixed lg:relative inset-y-0 left-0 z-50 lg:z-30 flex flex-col justify-between h-dvh shrink-0 select-none border-r bg-[#0d0f13] transition-all duration-300 ease-in-out ${
@@ -91,7 +94,6 @@ export const Sidebar = () => {
         {/* Brand Header */}
         <div>
           <div className="flex items-center justify-between px-5 pt-6 pb-4">
-            {/* Brand: always expanded inside the mobile drawer */}
             <div className="flex items-center lg:hidden">
               <SmitLogo size="normal" showSubtitle={true} />
             </div>
@@ -104,7 +106,7 @@ export const Sidebar = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <SmitLogo size="normal" showSubtitle={true} />
+                  <SmitLogo size="large" showSubtitle={true} />
                 </div>
               )}
             </div>
@@ -247,7 +249,7 @@ export const Sidebar = () => {
             logout();
             closeMobileSidebar();
           }}
-          className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+          className={`flex border items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
             sidebarCollapsed ? "lg:justify-center" : ""
           }`}
           title="Log out of SMIT Portal"

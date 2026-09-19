@@ -9,7 +9,7 @@ import {
   ChevronRight,
   Check,
 } from "lucide-react";
-import { useApp } from "../../context/AppContext";
+import { useTeacher } from "../../../context/TeacherContext";
 
 export const TeacherAttendanceTab = () => {
   const {
@@ -19,7 +19,7 @@ export const TeacherAttendanceTab = () => {
     teacherAttendanceStatus,
     markStudentAttendance,
     bulkMarkAttendance,
-  } = useApp();
+  } = useTeacher();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;

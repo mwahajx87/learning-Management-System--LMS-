@@ -10,18 +10,21 @@ import {
   Sparkles,
   ArrowLeftRight
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { TeacherStudentsTab } from '../components/teacher/TeacherStudentsTab';
-import { TeacherAttendanceTab } from '../components/teacher/TeacherAttendanceTab';
-import { TeacherAssignmentsTab } from '../components/teacher/TeacherAssignmentsTab';
-import { TeacherQuizzesTab } from '../components/teacher/TeacherQuizzesTab';
-import { TeacherProgressTab } from '../components/teacher/TeacherProgressTab';
-import { TeacherModals } from '../components/teacher/TeacherModals';
+import { useApp } from '../../context/AppContext';
+import { useTeacher } from '../../context/TeacherContext';
+import { TeacherStudentsTab } from './tabs/TeacherStudentsTab';
+import { TeacherAttendanceTab } from './tabs/TeacherAttendanceTab';
+import { TeacherAssignmentsTab } from './tabs/TeacherAssignmentsTab';
+import { TeacherQuizzesTab } from './tabs/TeacherQuizzesTab';
+import { TeacherProgressTab } from './tabs/TeacherProgressTab';
+import { TeacherModals } from './modals/TeacherModals';
 
 export const TeacherPortalPage = () => {
+  // Teacher portal state (tabs)
+  const { teacherActiveTab, setTeacherActiveTab } = useTeacher();
+
+  // App-level state (feedback modal, role, toast)
   const {
-    teacherActiveTab,
-    setTeacherActiveTab,
     setIsFeedbackOpen,
     setUserRole,
     showToast
@@ -66,8 +69,10 @@ export const TeacherPortalPage = () => {
         </div>
       </div>
 
-      {/* Horizontal Tabs Navigation (matching assignment.png, attendance.png, etc.) */}
-      <div className="border-b mb-6 overflow-x-auto scrollbar-none">
+      {/* Horizontal Tabs Navbar — large screens (lg+) only. On smaller screens
+          this navbar and its active tab indicator are removed; the aside bar
+          drawer (Sidebar trainer nav) is used for navigation instead. */}
+      <div className="hidden lg:block border-b mb-6 overflow-x-auto scrollbar-none">
         <div className="flex items-center gap-2 sm:gap-6 min-w-max">
           {tabs.map((tab) => {
             const Icon = tab.icon;

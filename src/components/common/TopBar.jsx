@@ -1,15 +1,27 @@
 import React from 'react';
-import { MessageSquare, ChevronRight, Menu } from 'lucide-react';
+import { MessageSquare, ChevronRight, Menu, LogOut } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { useStudent } from '../../context/StudentContext';
+import { useTeacher } from '../../context/TeacherContext';
 
 export const TopBar = () => {
+  // App-level state (course title, feedback, role, profile modal, logout)
   const {
-    activeNav,
-    setActiveNav,
     courseDetails,
     setIsFeedbackOpen,
-    setIsMobileSidebarOpen
+    setIsMobileSidebarOpen,
+    userRole,
+    setIsProfileOpen,
+    logout
   } = useApp();
+
+  // Student portal navigation (breadcrumb home link)
+  const { activeNav, setActiveNav } = useStudent();
+
+  // Teacher portal profile (name/avatar)
+  const { teacherTrainer } = useTeacher();
+
+  const isTrainer = userRole === 'trainer';
 
   const getPageTitle = () => {
     switch (activeNav) {
@@ -74,6 +86,37 @@ export const TopBar = () => {
 
       {/* Feedback Button */}
       <div className="flex items-center gap-3 shrink-0">
+        {/* Trainer profile & logout — desktop only (the aside bar is hidden on
+            lg+ for trainers, so these live here instead of the sidebar) */}
+        {isTrainer && (
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              id="topbar-trainer-profile-btn"
+              onClick={() => setIsProfileOpen(true)}
+              className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-lg border transition-colors cursor-pointer"
+              title="View Faculty Details"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                alt={teacherTrainer.name}
+                className="w-6 h-6 rounded-full object-cover border"
+              />
+              <span className="text-sm font-medium max-w-[160px] truncate">
+                {teacherTrainer.name}
+              </span>
+            </button>
+            <button
+              id="topbar-trainer-logout-btn"
+              type="button"
+              onClick={() => logout()}
+              className="p-2 rounded-lg border transition-colors cursor-pointer"
+              title="Log out of SMIT Portal"
+              aria-label="Log out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        )}
         <button
           id="topbar-feedback-btn"
           onClick={() => setIsFeedbackOpen(true)}

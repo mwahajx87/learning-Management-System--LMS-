@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, KeyRound, ArrowRight, ShieldCheck, Mail, User } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { SmitLogo } from '../components/common/SmitLogo';
+import { useApp } from '../../context/AppContext';
+import { SmitLogo } from './SmitLogo';
 
 export const LoginPage = () => {
   const { login, portalMode, setPortalMode, showToast } = useApp();

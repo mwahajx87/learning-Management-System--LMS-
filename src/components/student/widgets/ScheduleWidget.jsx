@@ -1,10 +1,10 @@
 import React from "react";
 import { Calendar } from "lucide-react";
-import { useApp } from "../../context/AppContext";
+import { useStudent } from "../../../context/StudentContext";
 
 export const ScheduleWidget = () => {
   const { scheduleDays, selectedScheduleDay, setSelectedScheduleDay } =
-    useApp();
+    useStudent();
 
   return (
     <div id="class-schedule-widget" className="border rounded-2xl p-5">
