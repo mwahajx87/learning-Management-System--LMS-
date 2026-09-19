@@ -65,7 +65,6 @@ export const DashboardPage = () => {
             <CourseCard />
           </div>
 
-          {/* Fee Section matching home page.png */}
           <FeeTable />
         </div>
 

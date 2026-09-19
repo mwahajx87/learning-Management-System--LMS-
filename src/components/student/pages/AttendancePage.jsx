@@ -21,7 +21,6 @@ export const AttendancePage = () => {
 
   return (
     <div id="attendance-page-container" className="space-y-4 animate-fade-in pb-10">
-      {/* 1. Top Metrics Cards matching attendance page.png */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard
           id="stats-card-total-classes"
@@ -60,7 +59,6 @@ export const AttendancePage = () => {
         />
       </div>
 
-      {/* 2. Attendance Overview Progress Card matching attendance page.png */}
       <div
         id="attendance-overview-banner"
         className="border rounded-2xl p-4 sm:p-6"
@@ -88,7 +86,7 @@ export const AttendancePage = () => {
         </div>
       </div>
 
-      {/* 3. Monthly Filter Dropdown (right aligned) */}
+      {/*  Monthly Filter Dropdown (right aligned) */}
       <div className="flex justify-end pt-1">
         <div className="relative inline-block">
           <select
@@ -107,7 +105,6 @@ export const AttendancePage = () => {
         </div>
       </div>
 
-      {/* 4. Attendance Records Table matching attendance page.png (desktop) */}
       <div className="hidden sm:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -146,7 +143,7 @@ export const AttendancePage = () => {
         </div>
       </div>
 
-      {/* Attendance Records Cards (mobile — stacked card layout) */}
+      {/* Attendance Records Cards */}
       <div className="sm:hidden space-y-3">
         {currentRecords.map((record) => (
           <div

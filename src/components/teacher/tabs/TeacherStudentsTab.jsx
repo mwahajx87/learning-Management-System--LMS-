@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { Search, Eye, ChevronLeft, ChevronRight, CheckCircle2, Copy } from 'lucide-react';
-import { useApp } from '../../../context/AppContext';
-import { useTeacher } from '../../../context/TeacherContext';
+import React, { useState } from "react";
+import {
+  Search,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Copy,
+} from "lucide-react";
+import { useApp } from "../../../context/AppContext";
+import { useTeacher } from "../../../context/TeacherContext";
 
 export const TeacherStudentsTab = () => {
   const { teacherStudents, setSelectedStudentForInspect } = useTeacher();
   const { copyToClipboard } = useApp();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('ALL');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -17,7 +24,7 @@ export const TeacherStudentsTab = () => {
       st.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       st.rollNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       st.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'ALL' || st.status === statusFilter;
+    const matchesStatus = statusFilter === "ALL" || st.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
@@ -25,12 +32,11 @@ export const TeacherStudentsTab = () => {
   const totalPages = Math.max(1, Math.ceil(totalRecords / itemsPerPage));
   const displayedStudents = filteredStudents.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Search & Filter Header (matching student.png) */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 sm:p-4 rounded-xl border">
         <div className="relative flex-1">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -82,10 +88,7 @@ export const TeacherStudentsTab = () => {
             <tbody className="divide-y text-xs">
               {displayedStudents.length > 0 ? (
                 displayedStudents.map((st) => (
-                  <tr
-                    key={st.id}
-                    className="transition-colors group"
-                  >
+                  <tr key={st.id} className="transition-colors group">
                     {/* Name + Avatar */}
                     <td className="py-3.5 px-4 sm:px-6">
                       <div className="flex items-center gap-3">
@@ -106,7 +109,9 @@ export const TeacherStudentsTab = () => {
                         <span>{st.rollNumber}</span>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard(st.rollNumber, 'Roll Number')}
+                          onClick={() =>
+                            copyToClipboard(st.rollNumber, "Roll Number")
+                          }
                           className=" p-1 transition-colors"
                           title="Copy Roll Number"
                         >
@@ -116,9 +121,7 @@ export const TeacherStudentsTab = () => {
                     </td>
 
                     {/* Email */}
-                    <td className="py-3.5 px-4 sm:px-6">
-                      {st.email}
-                    </td>
+                    <td className="py-3.5 px-4 sm:px-6">{st.email}</td>
 
                     {/* Status badge */}
                     <td className="py-3.5 px-4 sm:px-6 text-center">
@@ -151,11 +154,12 @@ export const TeacherStudentsTab = () => {
           </table>
         </div>
 
-        {/* Table Footer with Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-3.5 border-t text-xs">
           <div>
-            Showing {totalRecords > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}-
-            {Math.min(currentPage * itemsPerPage, totalRecords)} of {totalRecords} records
+            Showing{" "}
+            {totalRecords > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}-
+            {Math.min(currentPage * itemsPerPage, totalRecords)} of{" "}
+            {totalRecords} records
           </div>
 
           <div className="flex items-center gap-1.5">
@@ -175,9 +179,7 @@ export const TeacherStudentsTab = () => {
                 type="button"
                 onClick={() => setCurrentPage(pg)}
                 className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                  currentPage === pg
-                    ? ''
-                    : 'border'
+                  currentPage === pg ? "" : "border"
                 }`}
               >
                 {pg}
@@ -197,7 +199,6 @@ export const TeacherStudentsTab = () => {
         </div>
       </div>
 
-      {/* Students Cards (mobile — stacked card layout) */}
       <div className="md:hidden space-y-3">
         {displayedStudents.length > 0 ? (
           displayedStudents.map((st) => (
@@ -227,7 +228,9 @@ export const TeacherStudentsTab = () => {
                     {st.rollNumber}
                     <button
                       type="button"
-                      onClick={() => copyToClipboard(st.rollNumber, 'Roll Number')}
+                      onClick={() =>
+                        copyToClipboard(st.rollNumber, "Roll Number")
+                      }
                       className="p-1 transition-colors"
                       title="Copy Roll Number"
                     >
@@ -241,7 +244,6 @@ export const TeacherStudentsTab = () => {
                 </div>
               </div>
 
-              {/* Full-width Action */}
               <button
                 type="button"
                 onClick={() => setSelectedStudentForInspect(st)}
@@ -259,12 +261,11 @@ export const TeacherStudentsTab = () => {
           </div>
         )}
       </div>
-
-      {/* Pagination Controls (mobile) */}
       <div className="md:hidden rounded-xl border px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div>
           Showing {totalRecords > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}-
-          {Math.min(currentPage * itemsPerPage, totalRecords)} of {totalRecords} records
+          {Math.min(currentPage * itemsPerPage, totalRecords)} of {totalRecords}{" "}
+          records
         </div>
 
         <div className="flex items-center gap-1.5">
@@ -284,7 +285,7 @@ export const TeacherStudentsTab = () => {
               type="button"
               onClick={() => setCurrentPage(pg)}
               className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                currentPage === pg ? '' : 'border'
+                currentPage === pg ? "" : "border"
               }`}
             >
               {pg}

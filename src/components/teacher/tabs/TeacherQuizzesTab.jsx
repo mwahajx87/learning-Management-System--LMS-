@@ -42,7 +42,6 @@ export const TeacherQuizzesTab = () => {
         </button>
       </div>
 
-      {/* Quizzes Table (matching quiz.png in Student Portal Dark Theme) (desktop) */}
       <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -96,7 +95,6 @@ export const TeacherQuizzesTab = () => {
                     </span>
                   </td>
 
-                  {/* Action Icons (Toggle, Questions list, Eye view) */}
                   <td className="py-3.5 px-4 sm:px-6 align-top text-center">
                     <div className="inline-flex items-center gap-1.5">
                       {/* Active Status Switch */}
@@ -139,7 +137,6 @@ export const TeacherQuizzesTab = () => {
         </div>
       </div>
 
-      {/* Quizzes Cards (mobile — stacked card layout) */}
       <div className="md:hidden space-y-3">
         {teacherQuizzes.map((q) => (
           <div key={q.id} className="rounded-xl border p-4 space-y-3">

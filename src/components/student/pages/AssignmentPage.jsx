@@ -16,7 +16,6 @@ import { StatusBadge } from '../../common/StatusBadge';
 export const AssignmentPage = () => {
   const { assignments, setSelectedAssignment, setEditingAssignment } = useStudent();
 
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const totalPages = Math.ceil(assignments.length / pageSize);
@@ -34,7 +33,6 @@ export const AssignmentPage = () => {
 
   return (
     <div id="assignment-page-container" className="space-y-6 animate-fade-in pb-12">
-      {/* Top Metrics Cards matching assignment full page.png */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <StatsCard
           id="stats-card-assigned"
@@ -64,7 +62,6 @@ export const AssignmentPage = () => {
         />
       </div>
 
-      {/* Assignments Table matching assignment full page.png & page 2 (desktop) */}
       <div className="hidden md:block border rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -120,7 +117,6 @@ export const AssignmentPage = () => {
                     )}
                   </td>
 
-                  {/* Due Date (purple if hackathon, white otherwise) */}
                   <td className="py-4 px-6 whitespace-nowrap">
                     <span
                       className={`text-sm font-medium ${
@@ -187,7 +183,6 @@ export const AssignmentPage = () => {
           </table>
         </div>
 
-        {/* Pagination Controls matching screenshot */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-4 border-t">
           <div className="text-xs leading-tight select-none text-center sm:text-left">
             <div>
@@ -247,7 +242,6 @@ export const AssignmentPage = () => {
         </div>
       </div>
 
-      {/* Assignments Cards (mobile — stacked card layout) */}
       <div className="md:hidden space-y-3">
         {paginatedAssignments.map((asg) => (
           <div key={asg.id} className="border rounded-2xl p-4 space-y-3">
@@ -308,7 +302,6 @@ export const AssignmentPage = () => {
         ))}
       </div>
 
-      {/* Pagination Controls (mobile) */}
       <div className="md:hidden border rounded-2xl overflow-hidden shadow-sm">
         <div className="flex flex-col items-center justify-between gap-3 px-4 py-4">
           <div className="text-xs leading-tight select-none text-center">

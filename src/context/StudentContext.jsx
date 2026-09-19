@@ -13,12 +13,6 @@ import {
 
 const StudentContext = createContext();
 
-// ============================================================
-//  Student Context - all student-portal state and actions
-//  (profile, navigation, dashboard, attendance, fees, progress,
-//   assignments, quizzes and student modals)
-//  App-level concerns (auth, sidebar, toast) live in AppContext.
-// ============================================================
 export const StudentProvider = ({ children }) => {
   // Shared app helpers (toast)
   const { showToast } = useApp();

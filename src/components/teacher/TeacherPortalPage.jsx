@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Users,
   Calendar,
@@ -8,50 +8,45 @@ import {
   MessageSquare,
   ChevronRight,
   Sparkles,
-  ArrowLeftRight
-} from 'lucide-react';
-import { useApp } from '../../context/AppContext';
-import { useTeacher } from '../../context/TeacherContext';
-import { TeacherStudentsTab } from './tabs/TeacherStudentsTab';
-import { TeacherAttendanceTab } from './tabs/TeacherAttendanceTab';
-import { TeacherAssignmentsTab } from './tabs/TeacherAssignmentsTab';
-import { TeacherQuizzesTab } from './tabs/TeacherQuizzesTab';
-import { TeacherProgressTab } from './tabs/TeacherProgressTab';
-import { TeacherModals } from './modals/TeacherModals';
+  ArrowLeftRight,
+} from "lucide-react";
+import { useTeacher } from "../../context/TeacherContext";
+import { TeacherStudentsTab } from "./tabs/TeacherStudentsTab";
+import { TeacherAttendanceTab } from "./tabs/TeacherAttendanceTab";
+import { TeacherAssignmentsTab } from "./tabs/TeacherAssignmentsTab";
+import { TeacherQuizzesTab } from "./tabs/TeacherQuizzesTab";
+import { TeacherProgressTab } from "./tabs/TeacherProgressTab";
+import { TeacherModals } from "./modals/TeacherModals";
 
 export const TeacherPortalPage = () => {
-  // Teacher portal state (tabs)
-  const { teacherActiveTab, setTeacherActiveTab } = useTeacher();
+  const { teacherActiveTab, setTeacherActiveTab, teacherTrainer } =
+    useTeacher();
 
-  // App-level state (feedback modal, role, toast)
-  const {
-    setIsFeedbackOpen,
-    setUserRole,
-    showToast
-  } = useApp();
+  const trainerName = teacherTrainer?.name || "Trainer Name";
+  const trainerBatch = teacherTrainer?.batch || "Trainer Batch";
 
   const tabs = [
-    { id: 'students', label: 'Students', icon: Users },
-    { id: 'attendance', label: 'Attendance', icon: Calendar },
-    { id: 'assignments', label: 'Assignments', icon: FileText },
-    { id: 'quizzes', label: 'Quizzes', icon: CheckSquare },
-    { id: 'progress', label: 'Course Progress', icon: BookOpen }
+    { id: "students", label: "Students", icon: Users },
+    { id: "attendance", label: "Attendance", icon: Calendar },
+    { id: "assignments", label: "Assignments", icon: FileText },
+    { id: "quizzes", label: "Quizzes", icon: CheckSquare },
+    { id: "progress", label: "Course Progress", icon: BookOpen },
   ];
 
   const renderActiveTabContent = () => {
     switch (teacherActiveTab) {
-      case 'students':
+      case "students":
         return <TeacherStudentsTab />;
-      case 'attendance':
+      case "attendance":
         return <TeacherAttendanceTab />;
-      case 'assignments':
+      case "assignments":
         return <TeacherAssignmentsTab />;
-      case 'quizzes':
+      case "quizzes":
         return <TeacherQuizzesTab />;
-      case 'progress':
+      case "progress":
         return <TeacherProgressTab />;
       default:
-        return <TeacherAssignmentsTab />;
+        return <TeacherStudentsTab />;
     }
   };
 
@@ -64,14 +59,11 @@ export const TeacherPortalPage = () => {
             Modern Web Application Development
           </h1>
           <div className="text-xs mt-0.5 font-medium">
-            Trainer Portal • Batch 20 • Lead Faculty: S Muzammil Javed
+            Trainer Portal • {trainerBatch} • Lead Faculty: {trainerName}
           </div>
         </div>
       </div>
 
-      {/* Horizontal Tabs Navbar — large screens (lg+) only. On smaller screens
-          this navbar and its active tab indicator are removed; the aside bar
-          drawer (Sidebar trainer nav) is used for navigation instead. */}
       <div className="hidden lg:block border-b mb-6 overflow-x-auto scrollbar-none">
         <div className="flex items-center gap-2 sm:gap-6 min-w-max">
           {tabs.map((tab) => {
@@ -85,15 +77,11 @@ export const TeacherPortalPage = () => {
                 type="button"
                 onClick={() => setTeacherActiveTab(tab.id)}
                 className={`flex items-center gap-2 pb-3 pt-1 text-xs sm:text-sm font-medium transition-all relative cursor-pointer ${
-                  isActive
-                    ? 'font-bold'
-                    : ''
+                  isActive ? "font-bold" : ""
                 }`}
               >
                 <Icon
-                  className={`w-4 h-4 transition-colors ${
-                    isActive ? '' : ''
-                  }`}
+                  className={`w-4 h-4 transition-colors ${isActive ? "" : ""}`}
                 />
                 <span>{tab.label}</span>
 
@@ -112,7 +100,6 @@ export const TeacherPortalPage = () => {
         {renderActiveTabContent()}
       </main>
 
-      {/* Modals for assignments, student profile inspector, quiz bank */}
       <TeacherModals />
     </div>
   );

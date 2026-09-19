@@ -40,7 +40,6 @@ export const TeacherAssignmentsTab = () => {
         </button>
       </div>
 
-      {/* Assignments Table (matching assignment.png in Student Portal Dark Theme) (desktop) */}
       <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -167,7 +166,6 @@ export const TeacherAssignmentsTab = () => {
           </table>
         </div>
 
-        {/* Table Footer with Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-3.5 border-t text-xs">
           <div>
             Showing {(currentPage - 1) * itemsPerPage + 1}-

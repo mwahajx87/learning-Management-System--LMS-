@@ -22,7 +22,6 @@ import avatarImg from "../../assets/images/student_avatar_1789503254707.jpg";
 import { SmitLogo } from "./SmitLogo";
 
 export const Sidebar = () => {
-  // App-level state (auth, role, sidebar, toast, profile modal)
   const {
     sidebarCollapsed,
     setSidebarCollapsed,
@@ -42,7 +41,6 @@ export const Sidebar = () => {
   const { teacherTrainer, teacherActiveTab, setTeacherActiveTab } =
     useTeacher();
 
-  // Close the mobile drawer with the Escape key
   useEffect(() => {
     if (!isMobileSidebarOpen) return;
     const handleKeyDown = (e) => {
@@ -77,9 +75,7 @@ export const Sidebar = () => {
         id="mobile-sidebar-backdrop"
         onClick={closeMobileSidebar}
         className={`fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          isMobileSidebarOpen
-            ? "opacity-100"
-            : "opacity-0 pointer-events-none"
+          isMobileSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
 
@@ -137,127 +133,122 @@ export const Sidebar = () => {
             </button>
           </div>
 
-        {/* Portal Mode Tag */}
-
-        {/* Navigation Items */}
-        <nav className="px-3.5 space-y-1 mt-2 text">
-          {isTrainer
-            ? trainerNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = teacherActiveTab === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    id={`trainer-nav-${item.id}`}
-                    onClick={() => {
-                      setTeacherActiveTab(item.id);
-                      closeMobileSidebar();
-                    }}
-                    className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
-                      isActive
-                        ? " border shadow-sm"
-                        : ""
-                    } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
-                    title={sidebarCollapsed ? item.label : undefined}
-                  >
-                    <Icon
-                      className={`w-4 h-4 shrink-0 ${
-                        isActive ? "" : ""
-                      }`}
-                    />
-                    <span className={`tracking-wide text-[13.5px] ${sidebarCollapsed ? "lg:hidden" : ""}`}>
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })
-            : studentNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeNav === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    id={`nav-${item.id}`}
-                    onClick={() => {
-                      setActiveNav(item.id);
-                      closeMobileSidebar();
-                    }}
-                    className={`w-full flex items-center gap-3.5 px-1.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
-                      isActive
-                        ? " border shadow-sm"
-                        : ""
-                    } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
-                    title={sidebarCollapsed ? item.label : undefined}
-                  >
-                    <Icon
-                      className={`w-5 h-5 shrink-0 ${
-                        isActive ? "" : ""
-                      }`}
-                    />
-                    <span className={`tracking-wide text-[14px] ${sidebarCollapsed ? "lg:hidden" : ""}`}>
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })}
-        </nav>
-      </div>
-
-      {/* User Profile Footer & Portal Switcher */}
-      <div className="px-3 py-3.5 pb-4 border-t flex flex-col gap-2">
-        {/* Profile Card */}
-        <div
-          id="sidebar-user-profile"
-          onClick={() => {
-            setIsProfileOpen && setIsProfileOpen(true);
-            closeMobileSidebar();
-          }}
-          className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors ${
-            sidebarCollapsed ? "lg:justify-center" : "lg:justify-between"
-          }`}
-          title={isTrainer ? "View Faculty Details" : "View Student Profile"}
-        >
-          <div className={`truncate min-w-0 ${sidebarCollapsed ? "lg:hidden" : ""}`}>
-            <div className="font-semibold text-[14px] tracking-wide truncate">
-              {isTrainer ? teacherTrainer.name : student.name}
-            </div>
-            <div className="text-[11px] truncate">
-              {isTrainer
-                ? "Lead Faculty"
-                : student.rollNumber || student.rollNo}
-            </div>
-          </div>
-
-          <div className="relative shrink-0">
-            <img
-              src={
-                isTrainer
-                  ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-                  : avatarImg
-              }
-              alt={isTrainer ? teacherTrainer.name : student.name}
-              className="w-9 h-9 rounded-full object-cover border"
-            />
-          </div>
+          {/* Navigation Items */}
+          <nav className="px-3.5 space-y-1 mt-2 text">
+            {isTrainer
+              ? trainerNavItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = teacherActiveTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      id={`trainer-nav-${item.id}`}
+                      onClick={() => {
+                        setTeacherActiveTab(item.id);
+                        closeMobileSidebar();
+                      }}
+                      className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+                        isActive ? " border shadow-sm" : ""
+                      } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
+                      title={sidebarCollapsed ? item.label : undefined}
+                    >
+                      <Icon
+                        className={`w-4 h-4 shrink-0 ${isActive ? "" : ""}`}
+                      />
+                      <span
+                        className={`tracking-wide text-[13.5px] ${sidebarCollapsed ? "lg:hidden" : ""}`}
+                      >
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                })
+              : studentNavItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeNav === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      id={`nav-${item.id}`}
+                      onClick={() => {
+                        setActiveNav(item.id);
+                        closeMobileSidebar();
+                      }}
+                      className={`w-full flex items-center gap-3.5 px-1.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+                        isActive ? " border shadow-sm" : ""
+                      } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
+                      title={sidebarCollapsed ? item.label : undefined}
+                    >
+                      <Icon
+                        className={`w-5 h-5 shrink-0 ${isActive ? "" : ""}`}
+                      />
+                      <span
+                        className={`tracking-wide text-[14px] ${sidebarCollapsed ? "lg:hidden" : ""}`}
+                      >
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                })}
+          </nav>
         </div>
 
-        {/* Quick Log out */}
-        <button
-          id="sidebar-logout-btn"
-          type="button"
-          onClick={() => {
-            logout();
-            closeMobileSidebar();
-          }}
-          className={`flex border items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-            sidebarCollapsed ? "lg:justify-center" : ""
-          }`}
-          title="Log out of SMIT Portal"
-        >
-          <LogOut className="w-3.5 h-3.5 shrink-0" />
-          <span className={sidebarCollapsed ? "lg:hidden" : ""}>Log Out</span>
-        </button>
-      </div>
+        <div className="px-3 py-3.5 pb-4 border-t flex flex-col gap-2">
+          {/* Profile Card */}
+          <div
+            id="sidebar-user-profile"
+            onClick={() => {
+              setIsProfileOpen && setIsProfileOpen(true);
+              closeMobileSidebar();
+            }}
+            className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors ${
+              sidebarCollapsed ? "lg:justify-center" : "lg:justify-between"
+            }`}
+            title={isTrainer ? "View Faculty Details" : "View Student Profile"}
+          >
+            <div
+              className={`truncate min-w-0 ${sidebarCollapsed ? "lg:hidden" : ""}`}
+            >
+              <div className="font-semibold text-[14px] tracking-wide truncate">
+                {isTrainer ? teacherTrainer.name : student.name}
+              </div>
+              <div className="text-[11px] truncate">
+                {isTrainer
+                  ? "Lead Faculty"
+                  : student.rollNumber || student.rollNo}
+              </div>
+            </div>
+
+            <div className="relative shrink-0">
+              <img
+                src={
+                  isTrainer
+                    ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+                    : avatarImg
+                }
+                alt={isTrainer ? teacherTrainer.name : student.name}
+                className="w-9 h-9 rounded-full object-cover border"
+              />
+            </div>
+          </div>
+
+          {/* Quick Log out */}
+          <button
+            id="sidebar-logout-btn"
+            type="button"
+            onClick={() => {
+              logout();
+              closeMobileSidebar();
+            }}
+            className={`flex border items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+              sidebarCollapsed ? "lg:justify-center" : ""
+            }`}
+            title="Log out of SMIT Portal"
+          >
+            <LogOut className="w-3.5 h-3.5 shrink-0" />
+            <span className={sidebarCollapsed ? "lg:hidden" : ""}>Log Out</span>
+          </button>
+        </div>
       </aside>
     </>
   );

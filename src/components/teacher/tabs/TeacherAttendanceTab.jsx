@@ -24,7 +24,6 @@ export const TeacherAttendanceTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Calculate dynamic stats based on marked status
   const totalStudents = teacherStudents.length;
   let presentCount = 0;
   let absentCount = 0;
@@ -85,7 +84,6 @@ export const TeacherAttendanceTab = () => {
         </div>
       </div>
 
-      {/* 4 Stat Cards (matching attendance.png) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
         {/* Total Students */}
         <div className="border rounded-xl p-4 flex items-center justify-between">
@@ -140,7 +138,6 @@ export const TeacherAttendanceTab = () => {
         </div>
       </div>
 
-      {/* Attendance Table (desktop) */}
       <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -175,7 +172,6 @@ export const TeacherAttendanceTab = () => {
                       </div>
                     </td>
 
-                    {/* Status Interactive Selector */}
                     <td className="py-3.5 px-4 sm:px-6 text-right">
                       <div className="inline-flex items-center gap-1.5 p-1 rounded-lg border">
                         <button
@@ -232,7 +228,6 @@ export const TeacherAttendanceTab = () => {
           </table>
         </div>
 
-        {/* Table Footer with Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-3.5 border-t text-xs">
           <div>
             Showing {(currentPage - 1) * itemsPerPage + 1}-
@@ -277,7 +272,6 @@ export const TeacherAttendanceTab = () => {
         </div>
       </div>
 
-      {/* Attendance Cards (mobile — stacked card layout) */}
       <div className="md:hidden space-y-3">
         {displayedStudents.map((st) => {
           const currentStatus =

@@ -122,7 +122,7 @@ export const QuizPage = () => {
         </div>
       </div>
 
-      {/* Quizzes Cards (mobile — stacked card layout) */}
+      {/* Quizzes Cards (mobile) */}
       <div className="md:hidden space-y-3">
         {quizzes.map((quiz) => {
           const isWarningAttempt = quiz.attempts.startsWith("2");

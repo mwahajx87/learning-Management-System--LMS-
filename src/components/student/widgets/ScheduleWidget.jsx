@@ -13,7 +13,7 @@ export const ScheduleWidget = () => {
         <h3 className="text-base font-bold tracking-normal">Class Schedule</h3>
       </div>
 
-      {/* Horizontal Date Selector */}
+      {/* Date Selector */}
       <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
         {scheduleDays.map((item) => {
           const isClassDay = item.hasClass;

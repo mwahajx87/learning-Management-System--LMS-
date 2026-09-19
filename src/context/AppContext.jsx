@@ -2,20 +2,11 @@ import React, { createContext, useContext, useState } from "react";
 
 const AppContext = createContext();
 
-// ============================================================
-//  App Context - shared, cross-portal concerns:
-//  (authentication, portal role, sidebar & mobile drawer,
-//   shared course details, profile/feedback modals, toasts)
-//  Student state lives in StudentContext, teacher state in
-//  TeacherContext.
-// ============================================================
 export const AppProvider = ({ children }) => {
-  // Authentication / Portal Role State
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [portalMode, setPortalMode] = useState("student"); // 'student' | 'trainer'
   const [userRole, setUserRole] = useState("student"); // 'student' | 'trainer'
 
-  // Sidebar State (collapsed rail) & Mobile Drawer (off-canvas on < lg screens)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const closeMobileSidebar = () => setIsMobileSidebarOpen(false);

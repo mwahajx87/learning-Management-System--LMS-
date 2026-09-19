@@ -8,14 +8,7 @@ import {
 
 const TeacherContext = createContext();
 
-// ============================================================
-//  Teacher Context - all teacher/trainer-portal state and
-//  actions (trainer profile, class students, assignments,
-//  quizzes, attendance and teacher modals)
-//  App-level concerns (auth, sidebar, toast) live in AppContext.
-// ============================================================
 export const TeacherProvider = ({ children }) => {
-  // Shared app helpers (toast)
   const { showToast } = useApp();
 
   const [teacherActiveTab, setTeacherActiveTab] = useState("assignments"); // 'students' | 'attendance' | 'assignments' | 'quizzes' | 'progress'
@@ -44,7 +37,6 @@ export const TeacherProvider = ({ children }) => {
   const [teacherAttendanceDate, setTeacherAttendanceDate] =
     useState("Tue Sep 15 2026");
 
-  // Maps rollNumber -> 'NOT MARKED' | 'PRESENT' | 'ABSENT' | 'LEAVE'
   const [teacherAttendanceStatus, setTeacherAttendanceStatus] = useState({});
 
   // Teacher Modals

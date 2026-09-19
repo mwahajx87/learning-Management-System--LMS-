@@ -10,7 +10,6 @@ import {
 import { useStudent } from "../../../context/StudentContext";
 import { StatsCard } from "../../common/StatsCard";
 
-// Pixel-perfect SVG Circular Progress Indicator matching progress page.png
 const CircularProgress = ({ percentage }) => {
   if (percentage === 0) {
     return (
@@ -86,7 +85,7 @@ export const ProgressPage = () => {
       id="progress-page-container"
       className="space-y-4 animate-fade-in pb-10"
     >
-      {/* 1. Top Metrics Cards matching progress page.png */}
+      {/* 1. Top Metrics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatsCard
           id="stats-card-total-topics"

@@ -13,9 +13,7 @@ import { useStudent } from "../../../context/StudentContext";
 import { useTeacher } from "../../../context/TeacherContext";
 
 export const TeacherProgressTab = () => {
-  // Course curriculum topics come from the student (shared) context
   const { progressModules, toggleTopicCompletion } = useStudent();
-  // Trainer profile comes from the teacher context
   const { teacherTrainer } = useTeacher();
   const [expandedModules, setExpandedModules] = useState({
     "mod-1": false,
@@ -32,7 +30,6 @@ export const TeacherProgressTab = () => {
     }));
   };
 
-  // Helper for Circular SVG Progress Ring
   const CircularProgress = ({ percentage, color = "var(--theme-accent)" }) => {
     const size = 52;
     const strokeWidth = 4.5;
@@ -72,7 +69,6 @@ export const TeacherProgressTab = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Section 1: COMPARE PROGRESS (matching progress.png) */}
       <div className="border rounded-xl p-4 sm:p-5">
         <div className="text-[11px] uppercase tracking-wider font-bold mb-1">
           COURSE PROGRESS

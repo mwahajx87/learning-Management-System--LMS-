@@ -8,7 +8,7 @@ export const INITIAL_STUDENT = {
     campus: "Zaitoon Ashraf IT Park",
     city: "Karachi",
     courseName: "Modern Web Application Development",
-    email: "wahajwahaj200@gmail.com",
+    email: "wahaj00@gmail.com",
     avatar: avatarImg,
 };
 

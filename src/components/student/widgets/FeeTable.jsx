@@ -80,7 +80,6 @@ export const FeeTable = () => {
         </div>
       </div>
 
-      {/* Fee Cards (mobile — stacked card layout) */}
       <div className="sm:hidden space-y-3">
         {feeRecords.slice(0, 1).map((record) => (
           <div key={record.id} className="border rounded-2xl p-4 space-y-3">

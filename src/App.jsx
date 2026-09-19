@@ -15,10 +15,6 @@ import { AssignmentViewModal } from "./components/student/modals/AssignmentViewM
 import { SubmitAssignmentModal } from "./components/student/modals/SubmitAssignmentModal";
 import { TeacherPortalPage } from "./components/teacher/TeacherPortalPage";
 
-// ============================================================
-//  Portal Layout (rendered inside Student + Teacher providers
-//  so both contexts are available to the layout & views)
-// ============================================================
 const PortalLayout = () => {
   const { userRole } = useApp();
   const { activeNav } = useStudent();
@@ -45,11 +41,6 @@ const PortalLayout = () => {
 
   return (
     <div className="flex h-dvh w-screen overflow-hidden font-sans select-text">
-      {/* Left Navigation Sidebar */}
-      {/* Trainer: the aside bar is removed on large screens (lg+) — the horizontal
-          navbar tabs in TeacherPortalPage act as the navbar there. On smaller
-          screens the aside bar remains as the off-canvas drawer.
-          Students keep the default sidebar behavior on all screen sizes. */}
       {isTrainer ? (
         <div className="lg:hidden">
           <Sidebar />
@@ -68,10 +59,8 @@ const PortalLayout = () => {
             </>
           ) : (
             <>
-              {/* Top Header & Breadcrumbs */}
               <TopBar />
 
-              {/* Scrollable Page Canvas */}
               <main
                 id="main-app-content-viewport"
                 className="flex-1 w-full pt-1 pb-10"
@@ -83,7 +72,6 @@ const PortalLayout = () => {
         </div>
       </div>
 
-      {/* Interactive Modals and Toasts */}
       <AssignmentViewModal />
       <SubmitAssignmentModal />
       <Toast />
@@ -91,14 +79,9 @@ const PortalLayout = () => {
   );
 };
 
-// ============================================================
-//  App Content — gates authentication and provides the
-//  role-scoped contexts around the portal layout
-// ============================================================
 const AppContent = () => {
   const { isAuthenticated } = useApp();
 
-  // If not authenticated, render the dedicated Login Page
   if (!isAuthenticated) {
     return (
       <>
