@@ -1,21 +1,17 @@
-import React from 'react';
-import { Clock, GraduationCap } from 'lucide-react';
-import { useStudent } from '../../../context/StudentContext';
-import { StatsCard } from '../../common/StatsCard';
-import { CourseCard } from '../widgets/CourseCard';
-import { ScheduleWidget } from '../widgets/ScheduleWidget';
-import { SubTabsWidget } from '../widgets/SubTabsWidget';
-import { FeeTable } from '../widgets/FeeTable';
+import React from "react";
+import { Clock, GraduationCap } from "lucide-react";
+import { useStudent } from "../../../context/StudentContext";
+import { StatsCard } from "../../common/StatsCard";
+import { CourseCard } from "../widgets/CourseCard";
+import { ScheduleWidget } from "../widgets/ScheduleWidget";
+import { SubTabsWidget } from "../widgets/SubTabsWidget";
+import { FeeTable } from "../widgets/FeeTable";
 
 export const DashboardPage = () => {
-  const {
-    attendanceSummary,
-    assignments,
-    setActiveNav
-  } = useStudent();
+  const { attendanceSummary, assignments, setActiveNav } = useStudent();
 
   const submittedAssignmentsCount = assignments.filter(
-    (a) => a.status === 'SUBMITTED' || a.status === 'APPROVED'
+    (a) => a.status === "SUBMITTED" || a.status === "APPROVED",
   ).length;
 
   return (
@@ -27,7 +23,7 @@ export const DashboardPage = () => {
           {/* Top Metrics Summary Cards: Attendance & Assignment */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div
-              onClick={() => setActiveNav('attendance')}
+              onClick={() => setActiveNav("attendance")}
               className="cursor-pointer transition-transform hover:-translate-y-0.5"
               title="Click to view Attendance details"
             >
@@ -36,13 +32,13 @@ export const DashboardPage = () => {
                 value={`${attendanceSummary.present}/${attendanceSummary.totalClasses}`}
                 label="Attendance"
                 icon={Clock}
-               
-               
+                iconBg="bg-info-400/10 border-info-400/30"
+                iconColor="text-info-600 dark:text-info-300"
               />
             </div>
 
             <div
-              onClick={() => setActiveNav('assignment')}
+              onClick={() => setActiveNav("assignment")}
               className="cursor-pointer transition-transform hover:-translate-y-0.5"
               title="Click to view Assignments"
             >
@@ -51,8 +47,8 @@ export const DashboardPage = () => {
                 value={`${submittedAssignmentsCount}/${assignments.length}`}
                 label="Assignment"
                 icon={GraduationCap}
-               
-               
+                iconBg="bg-accent-400/10 border-accent-400/30"
+                iconColor="text-accent-600 dark:text-accent-300"
               />
             </div>
           </div>

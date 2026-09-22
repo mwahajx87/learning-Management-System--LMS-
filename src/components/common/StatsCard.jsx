@@ -1,25 +1,23 @@
-import React from 'react';
+import React from "react";
 
 export const StatsCard = ({
   id,
   value,
   label,
   icon: Icon,
-  iconColor = '',
-  iconBg = ''
+  iconColor = "text-primary-600 dark:text-primary-300",
+  iconBg = "bg-primary-400/15 border-primary-400/30",
 }) => {
   return (
     <div
-      id={id || `stats-card-${label.toLowerCase().replace(/\s+/g, '-')}`}
-      className="border rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between gap-3"
+      id={id || `stats-card-${label.toLowerCase().replace(/\s+/g, "-")}`}
+      className="border border-line bg-surface rounded-2xl p-4 sm:p-5 lg:p-6 flex items-center justify-between gap-3 transition-colors hover:border-primary-400/30"
     >
       <div>
         <div className="text-2xl sm:text-3xl font-bold tracking-tight">
           {value}
         </div>
-        <div className="text-sm font-normal mt-1.5">
-          {label}
-        </div>
+        <div className="text-sm font-normal mt-1.5">{label}</div>
       </div>
 
       {Icon && (

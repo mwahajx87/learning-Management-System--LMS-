@@ -1,6 +1,89 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: toggling .dark on <html> (see AppContext) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
+  /* Primary — Warm Orange (#F29F67) */
+  --color-primary-50: #fdf5ee;
+  --color-primary-100: #fae8d6;
+  --color-primary-200: #f6d0ac;
+  --color-primary-300: #f4bc8b;
+  --color-primary-400: #f29f67;
+  --color-primary-500: #ec8340;
+  --color-primary-600: #d5692a;
+  --color-primary-700: #b15222;
+  --color-primary-800: #8e4320;
+  --color-primary-900: #733a1e;
+  --color-primary-950: #3f1d0d;
+
+  /* Secondary — Dark Navy (#1E1E2C) */
+  --color-secondary-50: #f3f3f7;
+  --color-secondary-100: #e7e7ee;
+  --color-secondary-200: #cbcbd9;
+  --color-secondary-300: #a3a3b8;
+  --color-secondary-400: #7a7a94;
+  --color-secondary-500: #565672;
+  --color-secondary-600: #3d3d54;
+  --color-secondary-700: #2b2b3d;
+  --color-secondary-800: #232331;
+  --color-secondary-900: #1e1e2c;
+  --color-secondary-950: #11111a;
+
+  /* Info — Blue (#3B8FF3) */
+  --color-info-50: #eff7fe;
+  --color-info-100: #daecfd;
+  --color-info-200: #bddffb;
+  --color-info-300: #90cbf8;
+  --color-info-400: #5cacf5;
+  --color-info-500: #3b8ff3;
+  --color-info-600: #2072db;
+  --color-info-700: #1b5bb0;
+  --color-info-800: #1c4d8e;
+  --color-info-900: #1c4173;
+  --color-info-950: #142946;
+
+  /* Accent — Teal (#34B1AA) */
+  --color-accent-50: #effaf9;
+  --color-accent-100: #d7f3f1;
+  --color-accent-200: #aee7e4;
+  --color-accent-300: #7bd5d0;
+  --color-accent-400: #4bbdb6;
+  --color-accent-500: #34b1aa;
+  --color-accent-600: #26948f;
+  --color-accent-700: #217873;
+  --color-accent-800: #1f605c;
+  --color-accent-900: #1d4f4c;
+  --color-accent-950: #0d2f2d;
+
+  /* Warning — Gold (#E0B50F) */
+  --color-warning-50: #fdfaeb;
+  --color-warning-100: #fbf2c8;
+  --color-warning-200: #f9e48c;
+  --color-warning-300: #f6d24f;
+  --color-warning-400: #efc324;
+  --color-warning-500: #e0b50f;
+  --color-warning-600: #be920a;
+  --color-warning-700: #98700c;
+  --color-warning-800: #7c5a11;
+  --color-warning-900: #6a4b15;
+  --color-warning-950: #3d2a07;
+
+  /* Semantic aliases — Light theme (StarAdmin reference)
+     canvas: page background, surface: cards, ink: headings/text,
+     muted: secondary text, line: hairline borders */
+  --color-canvas: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-ink: #1e1e2c;
+  --color-muted: #67677d;
+  --color-line: #e7e7ee;
+
+  /* Typography */
+  --font-sans: "Signika", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+
+  /* Animations */
   --animate-fade-in: fade-in 0.25s ease-out both;
   --animate-scale-in: scale-in 0.2s ease-out both;
 
@@ -8,6 +91,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -18,6 +102,7 @@
       opacity: 0;
       transform: scale(0.96);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
@@ -25,46 +110,105 @@
   }
 }
 
+/* Legacy aliases consumed by SVG-based components (CircularProgress, etc.) */
+:root {
+  --theme-accent: #f29f67;
+  --theme-success: #34b1aa;
+  --theme-info: #3b8ff3;
+  --theme-warning: #e0b50f;
+}
+
+/* Dark theme: overrides semantic tokens when <html class="dark"> is set.
+   Brand ramps (primary/info/accent/warning/secondary) stay untouched —
+   components layer dark: variants on top of these flipped semantics. */
+html.dark {
+  --color-canvas: #11111a;
+  --color-surface: #1e1e2c;
+  --color-surface-raised: #232331;
+  --color-ink: #e9e9f4;
+  --color-muted: #a3a3b8;
+  --color-line: #2b2b3d;
+  --theme-accent: #f4bc8b;
+  --theme-success: #4bbdb6;
+  --theme-info: #5cacf5;
+  --theme-warning: #efc324;
+}
+
 /* Hide scrollbars while keeping scrollability (used by horizontal tab rails) */
 @utility scrollbar-none {
   scrollbar-width: none;
   -ms-overflow-style: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
 @layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-line);
+  }
+
   * {
-    font-family: 'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans);
   }
 
   body {
-    background-color: #0d0f13;
-    color: #e2e8f0;
-    font-family: 'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  button, input, select, textarea {
-    font-family: 'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-sans);
+  }
+
+  ::placeholder {
+    color: var(--color-muted);
+    opacity: 0.65;
+  }
+
+  ::selection {
+    background-color: rgb(242 159 103 / 0.35);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(242 159 103 / 0.6);
+    outline-offset: 2px;
   }
 }
 
-/* Custom smooth dark scrollbars */
+/* Smooth theme-aware scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #0d0f13;
+  background: var(--color-canvas);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #1f222d;
+  background: var(--color-secondary-300);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #2b303f;
+  background: var(--color-primary-400);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-secondary-600);
 }

@@ -51,11 +51,11 @@ const PortalLayout = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-y-auto">
-        <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-full">
+        <div className="max-w-[1440px] w-full mx-auto px-2 sm:px-3 lg:px-4 flex flex-col min-h-full">
           {isTrainer ? (
             <>
-            <TopBar />
-            <TeacherPortalPage />
+              <TopBar />
+              <TeacherPortalPage />
             </>
           ) : (
             <>

@@ -34,10 +34,8 @@ export const Sidebar = () => {
     showToast,
   } = useApp();
 
-  // Student portal state
   const { activeNav, setActiveNav, student } = useStudent();
 
-  // Teacher portal state
   const { teacherTrainer, teacherActiveTab, setTeacherActiveTab } =
     useTeacher();
 
@@ -81,7 +79,7 @@ export const Sidebar = () => {
 
       <aside
         id="main-sidebar"
-        className={`fixed lg:relative inset-y-0 left-0 z-50 lg:z-30 flex flex-col justify-between h-dvh shrink-0 select-none border-r bg-[#0d0f13] transition-all duration-300 ease-in-out ${
+        className={`fixed lg:relative inset-y-0 left-0 z-50 lg:z-30 flex flex-col justify-between h-dvh shrink-0 select-none border-r border-secondary-200 dark:border-secondary-700 bg-surface transition-all duration-300 ease-in-out ${
           isMobileSidebarOpen
             ? "translate-x-0 w-[262px]"
             : "-translate-x-full w-[262px]"
@@ -148,12 +146,14 @@ export const Sidebar = () => {
                         closeMobileSidebar();
                       }}
                       className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
-                        isActive ? " border shadow-sm" : ""
+                        isActive
+                          ? "bg-primary-400/15 border border-primary-400/40 text-primary-600 dark:text-primary-300 shadow-sm"
+                          : "text-muted hover:text-ink hover:bg-secondary-900/5 dark:hover:bg-white/5"
                       } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon
-                        className={`w-4 h-4 shrink-0 ${isActive ? "" : ""}`}
+                        className={`w-4 h-4 shrink-0 ${isActive ? "text-primary-600 dark:text-primary-300" : ""}`}
                       />
                       <span
                         className={`tracking-wide text-[13.5px] ${sidebarCollapsed ? "lg:hidden" : ""}`}
@@ -175,12 +175,14 @@ export const Sidebar = () => {
                         closeMobileSidebar();
                       }}
                       className={`w-full flex items-center gap-3.5 px-1.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
-                        isActive ? " border shadow-sm" : ""
+                        isActive
+                          ? "bg-primary-400/15 border border-primary-400/40 text-primary-600 dark:text-primary-300 shadow-sm"
+                          : "text-muted hover:text-ink hover:bg-secondary-900/5 dark:hover:bg-white/5"
                       } ${sidebarCollapsed ? "lg:justify-center lg:px-0" : ""}`}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon
-                        className={`w-5 h-5 shrink-0 ${isActive ? "" : ""}`}
+                        className={`w-5 h-5 shrink-0 ${isActive ? "text-primary-600 dark:text-primary-300" : ""}`}
                       />
                       <span
                         className={`tracking-wide text-[14px] ${sidebarCollapsed ? "lg:hidden" : ""}`}
@@ -240,7 +242,7 @@ export const Sidebar = () => {
               logout();
               closeMobileSidebar();
             }}
-            className={`flex border items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+            className={`flex border border-secondary-200 dark:border-secondary-700 items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-medium text-muted transition-colors cursor-pointer hover:border-primary-400/40 hover:text-primary-600 dark:hover:text-primary-300 ${
               sidebarCollapsed ? "lg:justify-center" : ""
             }`}
             title="Log out of SMIT Portal"

@@ -45,7 +45,7 @@ export const TeacherAttendanceTab = () => {
   return (
     <div className="flex flex-col gap-5">
       {/* Date Picker Bar (matching attendance.png) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-line bg-surface">
         <div>
           <div className="text-sm font-semibold">Daily Attendance Register</div>
           <div className="text-xs">
@@ -54,21 +54,21 @@ export const TeacherAttendanceTab = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex items-center gap-2 border rounded-lg px-3 py-1.5 text-xs">
+          <div className="flex items-center gap-2 border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-lg px-3 py-1.5 text-xs">
             <Calendar className="w-3.5 h-3.5" />
             <span className="text-[11px]">Date:</span>
             <input
               type="text"
               value={teacherAttendanceDate}
               onChange={(e) => setTeacherAttendanceDate(e.target.value)}
-              className=" font-medium text-xs focus:outline-none w-28"
+              className="bg-transparent font-medium text-xs focus:outline-none w-28 text-primary-600 dark:text-primary-300"
             />
           </div>
 
           <button
             type="button"
             onClick={() => bulkMarkAttendance("PRESENT")}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-accent-400/40 text-accent-600 dark:text-accent-300 hover:bg-accent-400/10 transition-colors"
           >
             <Check className="w-3.5 h-3.5" />
             <span>Mark All Present</span>
@@ -77,7 +77,7 @@ export const TeacherAttendanceTab = () => {
           <button
             type="button"
             onClick={() => bulkMarkAttendance("NOT MARKED")}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors"
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-secondary-200 dark:border-secondary-700 hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
           >
             Reset
           </button>
@@ -86,7 +86,7 @@ export const TeacherAttendanceTab = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
         {/* Total Students */}
-        <div className="border rounded-xl p-4 flex items-center justify-between">
+        <div className="border border-line bg-surface rounded-xl p-4 flex items-center justify-between">
           <div>
             <div className="text-2xl font-bold tracking-tight">
               {totalStudents}
@@ -99,7 +99,7 @@ export const TeacherAttendanceTab = () => {
         </div>
 
         {/* Present */}
-        <div className="border rounded-xl p-4 flex items-center justify-between">
+        <div className="border border-line bg-surface rounded-xl p-4 flex items-center justify-between">
           <div>
             <div className="text-2xl font-bold tracking-tight">
               {presentCount}
@@ -112,7 +112,7 @@ export const TeacherAttendanceTab = () => {
         </div>
 
         {/* Absent */}
-        <div className="border rounded-xl p-4 flex items-center justify-between">
+        <div className="border border-line bg-surface rounded-xl p-4 flex items-center justify-between">
           <div>
             <div className="text-2xl font-bold tracking-tight">
               {absentCount}
@@ -125,7 +125,7 @@ export const TeacherAttendanceTab = () => {
         </div>
 
         {/* Leave */}
-        <div className="border rounded-xl p-4 flex items-center justify-between">
+        <div className="border border-line bg-surface rounded-xl p-4 flex items-center justify-between">
           <div>
             <div className="text-2xl font-bold tracking-tight">
               {leaveCount}
@@ -138,7 +138,7 @@ export const TeacherAttendanceTab = () => {
         </div>
       </div>
 
-      <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
+      <div className="hidden md:block rounded-xl border border-line bg-surface overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -180,7 +180,7 @@ export const TeacherAttendanceTab = () => {
                             markStudentAttendance(st.rollNumber, "PRESENT")
                           }
                           className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                            currentStatus === "PRESENT" ? " border" : ""
+                            currentStatus === "PRESENT" ? "bg-accent-400/15 border-accent-400/50 text-accent-600 dark:text-accent-300" : ""
                           }`}
                         >
                           PRESENT
@@ -191,7 +191,7 @@ export const TeacherAttendanceTab = () => {
                             markStudentAttendance(st.rollNumber, "ABSENT")
                           }
                           className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                            currentStatus === "ABSENT" ? " border" : ""
+                            currentStatus === "ABSENT" ? "bg-primary-400/15 border-primary-400/50 text-primary-600 dark:text-primary-300" : ""
                           }`}
                         >
                           ABSENT
@@ -202,7 +202,7 @@ export const TeacherAttendanceTab = () => {
                             markStudentAttendance(st.rollNumber, "LEAVE")
                           }
                           className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                            currentStatus === "LEAVE" ? " border" : ""
+                            currentStatus === "LEAVE" ? "bg-warning-400/15 border-warning-400/50 text-warning-600 dark:text-warning-300" : ""
                           }`}
                         >
                           LEAVE
@@ -213,7 +213,7 @@ export const TeacherAttendanceTab = () => {
                             markStudentAttendance(st.rollNumber, "NOT MARKED")
                           }
                           className={`px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                            currentStatus === "NOT MARKED" ? "border" : ""
+                            currentStatus === "NOT MARKED" ? "bg-secondary-200 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 text-ink" : ""
                           }`}
                           title="Clear Status"
                         >
@@ -252,7 +252,7 @@ export const TeacherAttendanceTab = () => {
                 type="button"
                 onClick={() => setCurrentPage(pg)}
                 className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                  currentPage === pg ? "" : "border"
+                  currentPage === pg ? "bg-primary-400/15 border-primary-400/60 text-primary-600 dark:text-primary-300" : "border"
                 }`}
               >
                 {pg}
@@ -278,7 +278,7 @@ export const TeacherAttendanceTab = () => {
             teacherAttendanceStatus[st.rollNumber] || "NOT MARKED";
 
           return (
-            <div key={st.id} className="rounded-xl border p-4 space-y-3">
+            <div key={st.id} className="rounded-xl border border-line bg-surface p-4 space-y-3">
               {/* Student Identity + Current Status */}
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5 min-w-0">
@@ -294,7 +294,7 @@ export const TeacherAttendanceTab = () => {
                     <div className="text-xs font-mono">{st.rollNumber}</div>
                   </div>
                 </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded border shrink-0">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 text-muted shrink-0">
                   {currentStatus}
                 </span>
               </div>
@@ -305,7 +305,7 @@ export const TeacherAttendanceTab = () => {
                   type="button"
                   onClick={() => markStudentAttendance(st.rollNumber, "PRESENT")}
                   className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                    currentStatus === "PRESENT" ? " border" : ""
+                    currentStatus === "PRESENT" ? "bg-accent-400/15 border-accent-400/50 text-accent-600 dark:text-accent-300" : ""
                   }`}
                 >
                   PRESENT
@@ -314,7 +314,7 @@ export const TeacherAttendanceTab = () => {
                   type="button"
                   onClick={() => markStudentAttendance(st.rollNumber, "ABSENT")}
                   className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                    currentStatus === "ABSENT" ? " border" : ""
+                    currentStatus === "ABSENT" ? "bg-primary-400/15 border-primary-400/50 text-primary-600 dark:text-primary-300" : ""
                   }`}
                 >
                   ABSENT
@@ -323,7 +323,7 @@ export const TeacherAttendanceTab = () => {
                   type="button"
                   onClick={() => markStudentAttendance(st.rollNumber, "LEAVE")}
                   className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors ${
-                    currentStatus === "LEAVE" ? " border" : ""
+                    currentStatus === "LEAVE" ? "bg-warning-400/15 border-warning-400/50 text-warning-600 dark:text-warning-300" : ""
                   }`}
                 >
                   LEAVE
@@ -334,7 +334,7 @@ export const TeacherAttendanceTab = () => {
                     markStudentAttendance(st.rollNumber, "NOT MARKED")
                   }
                   className={`px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                    currentStatus === "NOT MARKED" ? "border" : ""
+                    currentStatus === "NOT MARKED" ? "bg-secondary-200 dark:bg-secondary-700 border-secondary-300 dark:border-secondary-600 text-ink" : ""
                   }`}
                   title="Clear Status"
                 >
@@ -347,7 +347,7 @@ export const TeacherAttendanceTab = () => {
       </div>
 
       {/* Pagination Controls (mobile) */}
-      <div className="md:hidden rounded-xl border px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div className="md:hidden rounded-xl border border-line bg-surface px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div>
           Showing {(currentPage - 1) * itemsPerPage + 1}-
           {Math.min(currentPage * itemsPerPage, totalStudents)} of{" "}
@@ -371,7 +371,7 @@ export const TeacherAttendanceTab = () => {
               type="button"
               onClick={() => setCurrentPage(pg)}
               className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                currentPage === pg ? "" : "border"
+                currentPage === pg ? "bg-primary-400/15 border-primary-400/60 text-primary-600 dark:text-primary-300" : "border"
               }`}
             >
               {pg}

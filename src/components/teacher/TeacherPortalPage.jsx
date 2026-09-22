@@ -51,7 +51,7 @@ export const TeacherPortalPage = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 pb-12 animate-fadeIn">
+    <div className="flex-1 flex flex-col min-w-0 pb-12 animate-fade-in">
       {/* Course Title Banner */}
       <div className="flex items-center justify-between mb-4">
         <div>
@@ -77,17 +77,19 @@ export const TeacherPortalPage = () => {
                 type="button"
                 onClick={() => setTeacherActiveTab(tab.id)}
                 className={`flex items-center gap-2 pb-3 pt-1 text-xs sm:text-sm font-medium transition-all relative cursor-pointer ${
-                  isActive ? "font-bold" : ""
+                  isActive
+                    ? "font-bold text-primary-600 dark:text-primary-300"
+                    : "text-muted hover:text-ink"
                 }`}
               >
                 <Icon
-                  className={`w-4 h-4 transition-colors ${isActive ? "" : ""}`}
+                  className={`w-4 h-4 transition-colors ${isActive ? "text-primary-600 dark:text-primary-300" : ""}`}
                 />
                 <span>{tab.label}</span>
 
                 {/* Active Indicator Underline */}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-primary-400" />
                 )}
               </button>
             );

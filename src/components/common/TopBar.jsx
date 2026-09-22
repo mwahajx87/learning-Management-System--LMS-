@@ -1,5 +1,12 @@
 import React from "react";
-import { MessageSquare, ChevronRight, Menu, LogOut } from "lucide-react";
+import {
+  MessageSquare,
+  ChevronRight,
+  Menu,
+  LogOut,
+  Sun,
+  Moon,
+} from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import { useStudent } from "../../context/StudentContext";
 import { useTeacher } from "../../context/TeacherContext";
@@ -12,6 +19,8 @@ export const TopBar = () => {
     userRole,
     setIsProfileOpen,
     logout,
+    theme,
+    toggleTheme,
   } = useApp();
 
   const { activeNav, setActiveNav } = useStudent();
@@ -66,7 +75,7 @@ export const TopBar = () => {
       >
         <button
           onClick={() => setActiveNav("dashboard")}
-          className={`transition-colors font-medium whitespace-nowrap border-none p-0 text-[13.5px] cursor-pointer overflow-hidden text-ellipsis truncate max-w-[46vw] sm:max-w-none ${isTrainer ? "hidden" : ""}`}
+          className={`transition-colors font-medium whitespace-nowrap border-none p-0 text-[13.5px] cursor-pointer overflow-hidden text-ellipsis truncate max-w-[46vw] sm:max-w-none text-muted hover:text-primary-600 dark:hover:text-primary-300 ${isTrainer ? "hidden" : ""}`}
         >
           {courseDetails.title}
         </button>
@@ -76,7 +85,7 @@ export const TopBar = () => {
             className="transition-colors font-medium whitespace-nowrap border-none p-0 text-[13.5px] cursor-pointer overflow-hidden text-ellipsis truncate max-w-[46vw] sm:max-w-none"
           >
             <div
-              className={`flex items-baseline font-black text-[15px] tracking-normal lg:text-3xl`}
+              className={`flex items-baseline font-black text-[15px] tracking-normal lg:text-3xl text-primary-500 dark:text-primary-400`}
               style={{ fontFamily: "'Signika', sans-serif" }}
             >
               <span>S</span>
@@ -89,7 +98,7 @@ export const TopBar = () => {
         {pageTitle && (
           <>
             <ChevronRight className="w-3.5 h-3.5 mx-2 shrink-0" />
-            <span className="cursor-pointer font-semibold whitespace-nowrap">
+            <span className="cursor-pointer font-semibold whitespace-nowrap text-primary-600 dark:text-primary-300">
               {pageTitle}
             </span>
           </>
@@ -103,7 +112,7 @@ export const TopBar = () => {
             <button
               id="topbar-trainer-profile-btn"
               onClick={() => setIsProfileOpen(true)}
-              className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-lg border transition-colors cursor-pointer"
+              className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-lg border border-secondary-200 dark:border-secondary-700 transition-colors cursor-pointer hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
               title="View Faculty Details"
             >
               <img
@@ -119,7 +128,7 @@ export const TopBar = () => {
               id="topbar-trainer-logout-btn"
               type="button"
               onClick={() => logout()}
-              className="p-2 rounded-lg border transition-colors cursor-pointer"
+              className="p-2 rounded-lg border border-secondary-200 dark:border-secondary-700 transition-colors cursor-pointer hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
               title="Log out of SMIT Portal"
               aria-label="Log out"
             >
@@ -127,10 +136,30 @@ export const TopBar = () => {
             </button>
           </div>
         )}
+        {/* Theme Toggle */}
+        <button
+          id="topbar-theme-toggle-btn"
+          type="button"
+          onClick={toggleTheme}
+          className="p-2 rounded-lg border border-secondary-200 dark:border-secondary-700 transition-colors cursor-pointer hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
+          title={
+            theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+          }
+          aria-label={
+            theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+          }
+        >
+          {theme === "dark" ? (
+            <Sun className="w-4 h-4" />
+          ) : (
+            <Moon className="w-4 h-4" />
+          )}
+        </button>
+
         <button
           id="topbar-feedback-btn"
           onClick={() => setIsFeedbackOpen(true)}
-          className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border transition-colors"
+          className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium border border-secondary-200 dark:border-secondary-700 bg-surface transition-colors hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
         >
           <MessageSquare className="w-4 h-4" />
           <span>Feedback</span>

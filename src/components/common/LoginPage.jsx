@@ -51,7 +51,7 @@ export const LoginPage = () => {
   return (
     <div
       id="login-page-container"
-      className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 select-none"
+      className="h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 select-none"
     >
       <div className="w-full max-w-[430px] flex flex-col items-center">
         {/* Top SMIT Branding */}
@@ -59,12 +59,11 @@ export const LoginPage = () => {
           <SmitLogo size="large" showSubtitle={true} />
         </div>
 
-        {/* Portal Subtitle matching screenshots */}
-        <h2 className="text-lg font-medium mb-6 tracking-normal text-center">
+        <h2 className="text-lg font-medium mb-4 tracking-normal text-center text-muted">
           {isStudent ? "Student Portal" : "Trainer Portal"}
         </h2>
 
-        <div className="w-full border rounded-2xl p-7 sm:p-8 shadow-2xl">
+        <div className="w-full border border-secondary-200 dark:border-secondary-700 bg-surface rounded-2xl p-7 sm:p-8 shadow-2xl">
           <div className="mb-6">
             <h1 className="text-xl font-bold tracking-normal">Login</h1>
             <p className="text-sm mt-1.5 leading-relaxed font-normal">
@@ -74,7 +73,7 @@ export const LoginPage = () => {
             </p>
           </div>
 
-          <form onSubmit={handleFormSubmit} className="space-y-4">
+          <form onSubmit={handleFormSubmit} className="space-y-2">
             {isStudent ? (
               /* Student CNIC Input */
               <div>
@@ -88,7 +87,7 @@ export const LoginPage = () => {
                   value={cnic}
                   onChange={(e) => setCnic(e.target.value)}
                   placeholder="42101-XXXXXXX-X"
-                  className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
+                  className="w-full bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors"
                 />
               </div>
             ) : (
@@ -104,7 +103,7 @@ export const LoginPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="trainer@saylani.org"
-                  className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
+                  className="w-full bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors"
                 />
               </div>
             )}
@@ -122,7 +121,7 @@ export const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full border rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none transition-colors"
+                  className="w-full bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors"
                 />
                 <button
                   type="button"
@@ -146,10 +145,10 @@ export const LoginPage = () => {
                 id="login-submit-button"
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full border active:scale-[0.99] font-bold py-3 rounded-xl text-sm tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full border border-primary-400 bg-primary-400 text-secondary-950 hover:bg-primary-300 hover:border-primary-300 active:scale-[0.99] font-bold py-3 rounded-xl text-sm tracking-wider uppercase transition-all shadow-md shadow-primary-400/20 flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  <span className="inline-block w-4 h-4 border-2 rounded-full animate-spin" />
+                  <span className="inline-block w-4 h-4 border-2 border-secondary-950/30 border-t-secondary-950 rounded-full animate-spin" />
                 ) : (
                   <span>LOGIN</span>
                 )}
@@ -163,7 +162,7 @@ export const LoginPage = () => {
             <button
               type="button"
               onClick={handleDemoFill}
-              className=" font-medium transition-colors"
+              className="text-primary-600 dark:text-primary-300 font-medium transition-colors hover:text-primary-700 dark:hover:text-primary-200"
             >
               Fill Demo Info
             </button>
@@ -184,7 +183,7 @@ export const LoginPage = () => {
                   : "Switched to Student Portal",
               );
             }}
-            className="w-full border text-sm font-medium py-3 rounded-2xl transition-colors text-center shadow-md active:scale-[0.99]"
+            className="w-full border border-secondary-200 dark:border-secondary-700 bg-surface text-sm font-medium py-3 rounded-2xl transition-colors text-center shadow-md active:scale-[0.99] hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
           >
             {isStudent ? "Login as teacher" : "Login as student"}
           </button>

@@ -1,25 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { X, Upload, Github, Globe, FileText } from 'lucide-react';
-import { useApp } from '../../../context/AppContext';
-import { useStudent } from '../../../context/StudentContext';
+import React, { useState, useEffect } from "react";
+import { X, Upload, Github, Globe, FileText } from "lucide-react";
+import { useApp } from "../../../context/AppContext";
+import { useStudent } from "../../../context/StudentContext";
 
 export const SubmitAssignmentModal = () => {
-  const { editingAssignment, setEditingAssignment, handleAssignmentSubmit } = useStudent();
+  const { editingAssignment, setEditingAssignment, handleAssignmentSubmit } =
+    useStudent();
   const { showToast } = useApp();
 
-  const [liveUrl, setLiveUrl] = useState('');
-  const [githubUrl, setGithubUrl] = useState('');
-  const [notes, setNotes] = useState('');
+  const [liveUrl, setLiveUrl] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     if (editingAssignment) {
-      setLiveUrl(editingAssignment.submissionLink || '');
-      setNotes(editingAssignment.submissionNotes || '');
-      if (editingAssignment.submissionNotes && editingAssignment.submissionNotes.includes('https://github.com')) {
-        const match = editingAssignment.submissionNotes.match(/https:\/\/github\.com[^\s]+/);
+      setLiveUrl(editingAssignment.submissionLink || "");
+      setNotes(editingAssignment.submissionNotes || "");
+      if (
+        editingAssignment.submissionNotes &&
+        editingAssignment.submissionNotes.includes("https://github.com")
+      ) {
+        const match = editingAssignment.submissionNotes.match(
+          /https:\/\/github\.com[^\s]+/,
+        );
         if (match) setGithubUrl(match[0]);
       } else {
-        setGithubUrl('');
+        setGithubUrl("");
       }
     }
   }, [editingAssignment]);
@@ -29,7 +35,7 @@ export const SubmitAssignmentModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!liveUrl && !githubUrl) {
-      showToast('Please provide either a Live URL or a GitHub Repository URL.');
+      showToast("Please provide either a Live URL or a GitHub Repository URL.");
       return;
     }
 
@@ -39,21 +45,21 @@ export const SubmitAssignmentModal = () => {
 
     handleAssignmentSubmit(editingAssignment.id, {
       link: liveUrl || githubUrl,
-      notes: compiledNotes.trim()
+      notes: compiledNotes.trim(),
     });
   };
 
   return (
     <div
       id="submit-assignment-modal-backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-950/70 backdrop-blur-sm overflow-y-auto animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) setEditingAssignment(null);
       }}
     >
       <div
         id="submit-assignment-modal-card"
-        className="border bg-[#0d0f13] w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden my-8"
+        className="border border-secondary-200 dark:border-secondary-700 bg-surface w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden my-8"
       >
         <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b">
           <div className="min-w-0">
@@ -67,49 +73,52 @@ export const SubmitAssignmentModal = () => {
           <button
             id="close-submit-modal-btn"
             onClick={() => setEditingAssignment(null)}
-            className=" p-1.5 rounded-lg transition-colors"
+            className=" p-1.5 rounded-lg text-muted hover:text-ink hover:bg-secondary-900/5 dark:hover:bg-white/5 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto max-h-[70dvh] sm:max-h-none">
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 sm:p-6 space-y-4 overflow-y-auto max-h-[70dvh] sm:max-h-none"
+        >
           <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-muted">
               Live Deployment URL (Vercel / Netlify / Firebase)
             </label>
             <div className="relative">
-                <Globe className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Globe className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-500 dark:text-primary-400" />
               <input
                 type="url"
                 id="submission-live-url-input"
                 value={liveUrl}
                 onChange={(e) => setLiveUrl(e.target.value)}
                 placeholder="https://your-project.vercel.app"
-                className="w-full pl-10 pr-4 py-2.5 border rounded-xl text-sm focus:outline-none"
+                className="w-full pl-10 pr-4 py-2.5 bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20"
               />
             </div>
           </div>
 
           <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-muted">
               GitHub Repository URL
             </label>
             <div className="relative">
-                <Github className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Github className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-500 dark:text-primary-400" />
               <input
                 type="url"
                 id="submission-github-url-input"
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/username/repository"
-                className="w-full pl-10 pr-4 py-2.5 border rounded-xl text-sm focus:outline-none"
+                className="w-full pl-10 pr-4 py-2.5 bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20"
               />
             </div>
           </div>
 
           <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-muted">
               Submission Notes / Remarks
             </label>
             <div className="relative">
@@ -119,7 +128,7 @@ export const SubmitAssignmentModal = () => {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Any special instructions or credentials for the examiner..."
-                className="w-full p-3 border rounded-xl text-sm focus:outline-none"
+                className="w-full p-3 bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-xl text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20"
               />
             </div>
           </div>
@@ -128,14 +137,14 @@ export const SubmitAssignmentModal = () => {
             <button
               type="button"
               onClick={() => setEditingAssignment(null)}
-              className="px-4 py-2 border text-xs font-semibold rounded-xl transition-colors"
+              className="px-4 py-2 border border-secondary-200 dark:border-secondary-700 text-xs font-semibold rounded-xl transition-colors text-muted hover:text-ink hover:border-primary-400/50"
             >
               Cancel
             </button>
             <button
               type="submit"
               id="submit-assignment-confirm-btn"
-              className="px-5 border py-2 text-xs font-bold rounded-xl transition-colors flex items-center gap-2 shadow-sm"
+              className="px-5 border border-primary-400 bg-primary-400 text-secondary-950 py-2 text-xs font-bold rounded-xl transition-colors flex items-center gap-2 shadow-md shadow-primary-400/20 hover:bg-primary-300 hover:border-primary-300"
             >
               <Upload className="w-4 h-4" />
               <span>Confirm Submission</span>

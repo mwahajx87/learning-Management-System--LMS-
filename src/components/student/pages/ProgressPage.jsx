@@ -10,58 +10,49 @@ import {
 import { useStudent } from "../../../context/StudentContext";
 import { StatsCard } from "../../common/StatsCard";
 
-const CircularProgress = ({ percentage }) => {
-  if (percentage === 0) {
-    return (
-      <div className="flex items-center justify-center min-w-[38px] text-sm font-semibold select-none">
-        0
-      </div>
-    );
-  }
-
-  const size = 38;
-  const strokeWidth = 3;
-  const radius = (size - strokeWidth) / 2;
+const CircularProgress = ({
+  percentage,
+  color = "var(--color-primary-400)",
+}) => {
+  const size = 52;
+  const strokeWidth = 4.5;
+  const center = size / 2;
+  const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div
-      className="relative flex items-center justify-center select-none shrink-0"
-      style={{ width: `${size}px`, height: `${size}px` }}
-    >
-      <svg className="w-full h-full -rotate-90" viewBox={`0 0 ${size} ${size}`}>
-        {/* Track circle */}
+    <div className="relative flex items-center justify-center">
+      <svg width={size} height={size} className="transform -rotate-90">
         <circle
-          cx={size / 2}
-          cy={size / 2}
+          cx={center}
+          cy={center}
           r={radius}
-          fill="var(--theme-accent)"
-          stroke="var(--theme-accent)"
+          stroke="var(--color-line)"
           strokeWidth={strokeWidth}
+          fill="transparent"
         />
-        {/* Active progress arc */}
         <circle
-          cx={size / 2}
-          cy={size / 2}
+          cx={center}
+          cy={center}
           r={radius}
-          fill="none"
-          stroke="var(--theme-accent)"
+          stroke={percentage === 100 ? "var(--color-accent-400)" : color}
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
+          strokeDashoffset={offset}
           strokeLinecap="round"
+          fill="transparent"
+          className="transition-all duration-700 ease-out"
         />
       </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-[10.5px] font-bold">
-        {percentage}%
-      </span>
+      <span className="absolute text-[11px] font-bold">{percentage}%</span>
     </div>
   );
 };
 
 export const ProgressPage = () => {
-  const { progressSummary, progressModules, toggleTopicCompletion } = useStudent();
+  const { progressSummary, progressModules, toggleTopicCompletion } =
+    useStudent();
 
   // Expanded modules state: toggles accordion items (collapsed by default to match screenshot)
   const [expandedModules, setExpandedModules] = useState([]);
@@ -118,7 +109,7 @@ export const ProgressPage = () => {
             <div
               key={module.id}
               id={`module-card-${module.id}`}
-              className="border rounded-2xl overflow-hidden transition-all shadow-sm"
+              className="border border-line bg-surface rounded-2xl overflow-hidden transition-all shadow-sm"
             >
               {/* Module Header Bar */}
               <div
@@ -129,7 +120,9 @@ export const ProgressPage = () => {
                 <div className="flex items-center gap-4">
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center border shrink-0 ${
-                      isCompleted ? "" : ""
+                      isCompleted
+                        ? "bg-accent-400/15 border-accent-400/50 text-accent-600 dark:text-accent-300"
+                        : "bg-secondary-100 dark:bg-secondary-800/40 border-secondary-200 dark:border-secondary-700 text-muted"
                     }`}
                   >
                     {isCompleted ? (
@@ -176,7 +169,7 @@ export const ProgressPage = () => {
                     {module.topics.map((topic, index) => (
                       <div
                         key={index}
-                        className="px-4 py-3 rounded-xl border transition-colors"
+                        className="px-4 py-3 rounded-xl border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 transition-colors"
                       >
                         <div className="flex items-start gap-2.5">
                           <button
@@ -185,7 +178,11 @@ export const ProgressPage = () => {
                               e.stopPropagation();
                               toggleTopicCompletion(module.id, topic.name);
                             }}
-                            className="p-1 rounded-lg  transition-transform active:scale-90 mt-0.5 shrink-0"
+                            className={`p-1 rounded-lg border transition-transform active:scale-90 mt-0.5 shrink-0 ${
+                              topic.completed
+                                ? "bg-accent-400/15 border-accent-400/40 text-accent-600 dark:text-accent-300"
+                                : "bg-secondary-100 dark:bg-secondary-800/40 border-secondary-200 dark:border-secondary-700 text-muted"
+                            }`}
                             title={
                               topic.completed
                                 ? "Click to mark as pending"
@@ -214,13 +211,13 @@ export const ProgressPage = () => {
 
                             {/* Linked Assignments List */}
                             {topic.coveredIn && topic.coveredIn.length > 0 && (
-                              <div className="mt-2 border border-l-3 rounded-xl py-4 space-y-1 text-xs">
+                              <div className="mt-2 border border-l-3 border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-xl py-4 space-y-1 text-xs">
                                 {topic.coveredIn.map((item, idx) => (
                                   <div
                                     key={idx}
                                     className="flex items-center gap-2 px-3 "
                                   >
-                                    <div className="w-1.5 h-1.5 bg-white  rounded-full"></div>
+                                    <div className="w-1.5 h-1.5 bg-primary-400 rounded-full"></div>
                                     <span>{item}</span>
                                   </div>
                                 ))}

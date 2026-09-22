@@ -37,7 +37,7 @@ export const TeacherStudentsTab = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 sm:p-4 rounded-xl border">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 sm:p-4 rounded-xl border border-line bg-surface">
         <div className="relative flex-1">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -49,7 +49,7 @@ export const TeacherStudentsTab = () => {
               setCurrentPage(1);
             }}
             placeholder="Search by name, email or roll no..."
-            className="w-full pl-9 pr-4 py-2 border rounded-lg text-xs sm:text-sm focus:outline-none transition-colors"
+            className="w-full pl-9 pr-4 py-2 bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-primary-400 transition-colors"
           />
         </div>
 
@@ -63,7 +63,7 @@ export const TeacherStudentsTab = () => {
               setCurrentPage(1);
             }}
             aria-label="Filter students by enrollment status"
-            className="border text-xs rounded-lg px-3 py-2 focus:outline-none cursor-pointer"
+            className="bg-secondary-50 dark:bg-secondary-800/60 border border-secondary-200 dark:border-secondary-700 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-primary-400 cursor-pointer"
           >
             <option value="ALL">All Statuses</option>
             <option value="ENROLLED">Enrolled</option>
@@ -73,7 +73,7 @@ export const TeacherStudentsTab = () => {
       </div>
 
       {/* Students Table (desktop) */}
-      <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
+      <div className="hidden md:block rounded-xl border border-line bg-surface overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -112,7 +112,7 @@ export const TeacherStudentsTab = () => {
                           onClick={() =>
                             copyToClipboard(st.rollNumber, "Roll Number")
                           }
-                          className=" p-1 transition-colors"
+                          className=" p-1 transition-colors hover:text-primary-600 dark:hover:text-primary-300"
                           title="Copy Roll Number"
                         >
                           <Copy className="w-3 h-3" />
@@ -125,7 +125,13 @@ export const TeacherStudentsTab = () => {
 
                     {/* Status badge */}
                     <td className="py-3.5 px-4 sm:px-6 text-center">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider text- border">
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider border ${
+                          st.status === "ENROLLED"
+                            ? "border-accent-400/40 bg-accent-400/10 text-accent-600 dark:text-accent-300"
+                            : "border-primary-400/40 bg-primary-400/15 text-primary-600 dark:text-primary-300"
+                        }`}
+                      >
                         {st.status}
                       </span>
                     </td>
@@ -179,7 +185,9 @@ export const TeacherStudentsTab = () => {
                 type="button"
                 onClick={() => setCurrentPage(pg)}
                 className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                  currentPage === pg ? "" : "border"
+                  currentPage === pg
+                    ? "bg-primary-400/15 border-primary-400/60 text-primary-600 dark:text-primary-300"
+                    : "border"
                 }`}
               >
                 {pg}
@@ -215,7 +223,13 @@ export const TeacherStudentsTab = () => {
                     {st.name}
                   </span>
                 </div>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider border shrink-0">
+                <span
+                  className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider border shrink-0 ${
+                    st.status === "ENROLLED"
+                      ? "border-accent-400/40 bg-accent-400/10 text-accent-600 dark:text-accent-300"
+                      : "border-primary-400/40 bg-primary-400/15 text-primary-600 dark:text-primary-300"
+                  }`}
+                >
                   {st.status}
                 </span>
               </div>
@@ -231,7 +245,7 @@ export const TeacherStudentsTab = () => {
                       onClick={() =>
                         copyToClipboard(st.rollNumber, "Roll Number")
                       }
-                      className="p-1 transition-colors"
+                      className="p-1 transition-colors hover:text-primary-600 dark:hover:text-primary-300"
                       title="Copy Roll Number"
                     >
                       <Copy className="w-3 h-3" />
@@ -247,7 +261,7 @@ export const TeacherStudentsTab = () => {
               <button
                 type="button"
                 onClick={() => setSelectedStudentForInspect(st)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold border transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold border border-secondary-200 dark:border-secondary-700 hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                 title="View Student Profile & Performance"
               >
                 <Eye className="w-4 h-4" />
@@ -256,12 +270,12 @@ export const TeacherStudentsTab = () => {
             </div>
           ))
         ) : (
-          <div className="rounded-xl border p-6 text-center text-xs">
+          <div className="rounded-xl border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 p-6 text-center text-xs">
             No students found matching your search.
           </div>
         )}
       </div>
-      <div className="md:hidden rounded-xl border px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div className="md:hidden rounded-xl border border-line bg-surface px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div>
           Showing {totalRecords > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}-
           {Math.min(currentPage * itemsPerPage, totalRecords)} of {totalRecords}{" "}
@@ -285,7 +299,9 @@ export const TeacherStudentsTab = () => {
               type="button"
               onClick={() => setCurrentPage(pg)}
               className={`w-7 h-7 rounded-md text-xs font-medium transition-colors ${
-                currentPage === pg ? "" : "border"
+                currentPage === pg
+                  ? "bg-primary-400/15 border-primary-400/60 text-primary-600 dark:text-primary-300"
+                  : "border"
               }`}
             >
               {pg}

@@ -8,7 +8,7 @@ export const CourseCard = () => {
   return (
     <div
       id="active-course-banner-card"
-      className="border rounded-2xl overflow-hidden"
+      className="border border-line bg-surface rounded-2xl overflow-hidden"
     >
       <div className="p-4 sm:p-6">
         <div className="flex flex-wrap items-center  justify-between gap-3 mb-4">
@@ -17,7 +17,7 @@ export const CourseCard = () => {
           </h2>
           <span
             id="badge-enrolled"
-            className="px-2.5 py-0.5 text-xs font-semibold tracking-wider rounded-md border uppercase"
+            className="px-2.5 py-0.5 text-xs font-semibold tracking-wider rounded-md border border-accent-400/40 bg-accent-400/10 text-accent-600 dark:text-accent-300 uppercase"
           >
             {courseDetails.status}
           </span>
@@ -27,33 +27,33 @@ export const CourseCard = () => {
           {courseDetails.schedule.map((timing, idx) => (
             <div
               key={idx}
-              className="px-3.5 py-1.5 rounded-lg border text-xs font-normal"
+              className="px-3.5 py-1.5 rounded-lg border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 text-xs font-normal"
             >
               {timing}
             </div>
           ))}
         </div>
       </div>
-      <div className="border-t border-gray-300" />
+      <div className="border-t border-secondary-200/70 dark:border-secondary-700/60" />
       <div className="px-4 sm:px-6 py-4 sm:py-5">
         <div className="mb-6 flex flex-col gap-5">
           <div>
             <div className="flex justify-between items-center text-sm mb-2">
               <span>Progress</span>
-              <span className="font-medium ">
+              <span className="font-medium text-primary-600 dark:text-primary-300">
                 {courseDetails.progressPercentage}% Completed
               </span>
             </div>
-            <div className="w-full h-2 border rounded-full overflow-hidden">
+            <div className="w-full h-2 border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 rounded-full overflow-hidden">
               <div
-                className="h-full bg-white rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-primary-400 to-info-400 rounded-full transition-all duration-500"
                 style={{ width: `${courseDetails.progressPercentage}%` }}
               />
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 text-sm">
             <div className="flex items-center gap-2">
-              <Hash className="w-3.5 h-3.5" />
+              <Hash className="w-3.5 h-3.5 text-primary-500 dark:text-primary-400" />
               <div>
                 <span className="font-semibold">Batch: </span>
                 <span>{courseDetails.batch}</span>
@@ -61,7 +61,7 @@ export const CourseCard = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <User className="w-3.5 h-3.5" />
+              <User className="w-3.5 h-3.5 text-primary-500 dark:text-primary-400" />
               <div>
                 <span className="font-semibold">Roll: </span>
                 <span>{courseDetails.roll}</span>
@@ -69,7 +69,7 @@ export const CourseCard = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <MapPin className="w-3.5 h-3.5 shrink-0 text-primary-500 dark:text-primary-400" />
               <div className="truncate">
                 <span className="font-semibold">Campus: </span>
                 <span>{courseDetails.campus}</span>
@@ -77,7 +77,7 @@ export const CourseCard = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <Navigation className="w-3.5 h-3.5" />
+              <Navigation className="w-3.5 h-3.5 text-primary-500 dark:text-primary-400" />
               <div>
                 <span className="font-semibold">City: </span>
                 <span>{courseDetails.city}</span>

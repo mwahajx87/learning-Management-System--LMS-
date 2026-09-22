@@ -1,8 +1,8 @@
-import React from 'react';
-import { Copy } from 'lucide-react';
-import { useApp } from '../../../context/AppContext';
-import { useStudent } from '../../../context/StudentContext';
-import { StatusBadge } from '../../common/StatusBadge';
+import React from "react";
+import { Copy } from "lucide-react";
+import { useApp } from "../../../context/AppContext";
+import { useStudent } from "../../../context/StudentContext";
+import { StatusBadge } from "../../common/StatusBadge";
 
 export const FeeTable = () => {
   const { feeRecords } = useStudent();
@@ -10,41 +10,24 @@ export const FeeTable = () => {
 
   return (
     <div id="dashboard-fee-section" className="space-y-3">
-      <h3 className="text-lg font-bold tracking-normal">
-        Fee
-      </h3>
+      <h3 className="text-lg font-bold tracking-normal">Fee</h3>
 
-      <div className="hidden sm:block border rounded-2xl overflow-hidden shadow-sm">
+      <div className="hidden sm:block border border-line bg-surface rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left  border-collapse">
             <thead>
               <tr className="border-b">
-                <th className="py-4 px-2 text-sm font-normal">
-                  Month
-                </th>
-                <th className="py-4 px-2 text-sm font-normal">
-                  Amount
-                </th>
-                <th className="py-4 px-2 text-sm font-normal">
-                  Type
-                </th>
-                <th className="py-4 px-2 text-sm font-normal">
-                  Due date
-                </th>
-                <th className="py-4 px-2 text-sm font-normal">
-                  Voucher ID
-                </th>
-                <th className="py-4 px-2 text-sm font-normal">
-                  Status
-                </th>
+                <th className="py-4 px-2 text-sm font-normal">Month</th>
+                <th className="py-4 px-2 text-sm font-normal">Amount</th>
+                <th className="py-4 px-2 text-sm font-normal">Type</th>
+                <th className="py-4 px-2 text-sm font-normal">Due date</th>
+                <th className="py-4 px-2 text-sm font-normal">Voucher ID</th>
+                <th className="py-4 px-2 text-sm font-normal">Status</th>
               </tr>
             </thead>
             <tbody>
               {feeRecords.slice(0, 1).map((record) => (
-                <tr
-                  key={record.id}
-                  className="transition-colors"
-                >
+                <tr key={record.id} className="transition-colors">
                   <td className="py-4 px-2 text-sm font-semibold whitespace-nowrap">
                     {record.month}
                   </td>
@@ -62,8 +45,10 @@ export const FeeTable = () => {
                       <span>{record.voucherId}</span>
                       <button
                         id="copy-voucher-btn"
-                        onClick={() => copyToClipboard(record.voucherId, 'Voucher ID')}
-                        className="p-1 rounded-md border transition-colors"
+                        onClick={() =>
+                          copyToClipboard(record.voucherId, "Voucher ID")
+                        }
+                        className="p-1 rounded-md border border-secondary-200 dark:border-secondary-700 transition-colors hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
                         title="Copy Voucher ID"
                       >
                         <Copy className="w-3.5 h-3.5" />
@@ -82,7 +67,10 @@ export const FeeTable = () => {
 
       <div className="sm:hidden space-y-3">
         {feeRecords.slice(0, 1).map((record) => (
-          <div key={record.id} className="border rounded-2xl p-4 space-y-3">
+          <div
+            key={record.id}
+            className="border border-line bg-surface rounded-2xl p-4 space-y-3"
+          >
             {/* Month + Status */}
             <div className="flex items-start justify-between gap-3">
               <div className="text-sm font-bold">{record.month}</div>
@@ -111,8 +99,10 @@ export const FeeTable = () => {
                   </span>
                   <button
                     id="copy-voucher-btn"
-                    onClick={() => copyToClipboard(record.voucherId, 'Voucher ID')}
-                    className="p-1 rounded-md border transition-colors shrink-0"
+                    onClick={() =>
+                      copyToClipboard(record.voucherId, "Voucher ID")
+                    }
+                    className="p-1 rounded-md border border-secondary-200 dark:border-secondary-700 transition-colors shrink-0 hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
                     title="Copy Voucher ID"
                   >
                     <Copy className="w-3.5 h-3.5" />

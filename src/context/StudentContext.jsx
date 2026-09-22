@@ -39,7 +39,7 @@ export const StudentProvider = ({ children }) => {
 
   // --- Progress Tracking ---
   const [progressModules, setProgressModules] = useState(
-    INITIAL_PROGRESS_MODULES
+    INITIAL_PROGRESS_MODULES,
   );
   const progressSummary = {
     totalTopics: progressModules.reduce((acc, m) => acc + m.totalTopics, 0),

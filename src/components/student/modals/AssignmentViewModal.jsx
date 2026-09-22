@@ -1,24 +1,25 @@
-import React from 'react';
-import { X, Calendar, Link2, ExternalLink, FileEdit } from 'lucide-react';
-import { useStudent } from '../../../context/StudentContext';
-import { StatusBadge } from '../../common/StatusBadge';
+import React from "react";
+import { X, Calendar, Link2, ExternalLink, FileEdit } from "lucide-react";
+import { useStudent } from "../../../context/StudentContext";
+import { StatusBadge } from "../../common/StatusBadge";
 
 export const AssignmentViewModal = () => {
-  const { selectedAssignment, setSelectedAssignment, setEditingAssignment } = useStudent();
+  const { selectedAssignment, setSelectedAssignment, setEditingAssignment } =
+    useStudent();
 
   if (!selectedAssignment) return null;
 
   return (
     <div
       id="assignment-view-modal-backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-[2px] overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-950/70 backdrop-blur-[2px] overflow-y-auto animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) setSelectedAssignment(null);
       }}
     >
       <div
         id="assignment-info-modal-card"
-        className="border bg-[#0d0f13] w-full max-w-[620px] rounded-2xl shadow-2xl overflow-hidden my-6 animate-scale-in"
+        className="border border-secondary-200 dark:border-secondary-700 bg-surface w-full max-w-[620px] rounded-2xl shadow-2xl overflow-hidden my-6 animate-scale-in"
       >
         {/* Modal Header */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b">
@@ -28,7 +29,7 @@ export const AssignmentViewModal = () => {
           <button
             id="close-assignment-modal-btn"
             onClick={() => setSelectedAssignment(null)}
-            className=" transition-colors"
+            className="p-1.5 rounded-lg text-muted hover:text-ink hover:bg-secondary-900/5 dark:hover:bg-white/5 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -37,11 +38,9 @@ export const AssignmentViewModal = () => {
         {/* Modal Body */}
         <div className="p-4 sm:p-6 space-y-5 max-h-[70dvh] sm:max-h-[80vh] overflow-y-auto">
           {/* Top Details Card */}
-          <div className="border rounded-xl p-4 sm:p-5 space-y-4">
+          <div className="border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-xl p-4 sm:p-5 space-y-4">
             <div>
-              <div className="text-xs font-normal">
-                Title
-              </div>
+              <div className="text-xs font-normal">Title</div>
               <div className="text-base font-bold mt-1 leading-snug">
                 {selectedAssignment.title}
               </div>
@@ -49,19 +48,18 @@ export const AssignmentViewModal = () => {
 
             <div className="grid grid-cols-2 gap-4 pt-1">
               <div>
-                <div className="text-xs font-normal">
-                  Due Date
-                </div>
+                <div className="text-xs font-normal">Due Date</div>
                 <div className="flex items-center gap-2 mt-1.5 text-sm font-semibold">
-                  <Calendar className="w-4 h-4" />
-                  <span>{selectedAssignment.dueDateFull || selectedAssignment.dueDate}</span>
+                  <Calendar className="w-4 h-4 text-primary-600 dark:text-primary-300" />
+                  <span>
+                    {selectedAssignment.dueDateFull ||
+                      selectedAssignment.dueDate}
+                  </span>
                 </div>
               </div>
 
               <div>
-                <div className="text-xs font-normal">
-                  Status
-                </div>
+                <div className="text-xs font-normal">Status</div>
                 <div className="mt-1.5">
                   <StatusBadge status={selectedAssignment.status} />
                 </div>
@@ -69,29 +67,28 @@ export const AssignmentViewModal = () => {
             </div>
 
             <div>
-              <div className="text-xs font-normal">
-                Reference Links
-              </div>
+              <div className="text-xs font-normal">Reference Links</div>
               <div className="mt-1.5 space-y-2">
-                {selectedAssignment.referenceLinks && selectedAssignment.referenceLinks.length > 0 ? (
+                {selectedAssignment.referenceLinks &&
+                selectedAssignment.referenceLinks.length > 0 ? (
                   selectedAssignment.referenceLinks.map((link, idx) => (
                     <div
                       key={idx}
-                      className="border rounded-lg px-4 py-3 flex items-center gap-2.5"
+                      className="border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-lg px-4 py-3 flex items-center gap-2.5"
                     >
-                      <Link2 className="w-4 h-4 shrink-0" />
+                      <Link2 className="w-4 h-4 shrink-0 text-primary-500 dark:text-primary-400" />
                       <a
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm font-medium transition-colors truncate"
+                        className="text-info-600 dark:text-info-300 hover:text-info-700 dark:hover:text-info-300 transition-colors truncate"
                       >
                         {link}
                       </a>
                     </div>
                   ))
                 ) : (
-                  <div className="p-3 rounded-lg border text-xs">
+                  <div className="p-3 rounded-lg border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 text-xs">
                     No reference links attached
                   </div>
                 )}
@@ -99,11 +96,9 @@ export const AssignmentViewModal = () => {
             </div>
 
             <div>
-              <div className="text-xs font-normal">
-                Description
-              </div>
-              <div className="mt-1.5 border rounded-lg p-4 text-sm font-normal leading-relaxed whitespace-pre-line">
-                {selectedAssignment.description || 'No description provided.'}
+              <div className="text-xs font-normal">Description</div>
+              <div className="mt-1.5 border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-lg p-4 text-sm font-normal leading-relaxed whitespace-pre-line">
+                {selectedAssignment.description || "No description provided."}
               </div>
             </div>
           </div>
@@ -116,13 +111,11 @@ export const AssignmentViewModal = () => {
             </div>
 
             {selectedAssignment.submittedOn ? (
-              <div className="border rounded-xl p-5 space-y-4">
+              <div className="border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-xl p-5 space-y-4">
                 <div>
-                  <div className="text-xs font-normal">
-                    Submitted On
-                  </div>
+                  <div className="text-xs font-normal">Submitted On</div>
                   <div className="flex items-center gap-2 mt-1.5 text-sm font-semibold">
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-4 h-4 text-primary-600 dark:text-primary-300" />
                     <span>{selectedAssignment.submittedOn}</span>
                   </div>
                 </div>
@@ -135,12 +128,12 @@ export const AssignmentViewModal = () => {
                     </div>
                     <div className="mt-1.5 border rounded-lg px-4 py-3 flex items-center justify-between gap-3">
                       <div className="flex items-center gap-2.5 min-w-0">
-                        <Link2 className="w-4 h-4 shrink-0" />
+                        <Link2 className="w-4 h-4 shrink-0 text-primary-500 dark:text-primary-400" />
                         <a
                           href={selectedAssignment.submissionLink}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-sm font-medium hover:underline truncate"
+                          className="text-info-600 dark:text-info-300 hover:underline truncate"
                         >
                           {selectedAssignment.submissionLink}
                         </a>
@@ -149,7 +142,7 @@ export const AssignmentViewModal = () => {
                         href={selectedAssignment.submissionLink}
                         target="_blank"
                         rel="noreferrer"
-                        className=" transition-colors shrink-0"
+                        className="text-primary-500 dark:text-primary-400 hover:text-primary-600 dark:hover:text-primary-300 transition-colors shrink-0"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -159,17 +152,15 @@ export const AssignmentViewModal = () => {
 
                 {selectedAssignment.submissionNotes && (
                   <div>
-                    <div className="text-xs font-normal">
-                      Submission Notes
-                    </div>
-                    <div className="mt-1.5 border rounded-lg p-4 text-sm font-normal whitespace-pre-line font-mono leading-relaxed">
+                    <div className="text-xs font-normal">Submission Notes</div>
+                    <div className="mt-1.5 border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-lg p-4 text-sm font-normal whitespace-pre-line font-mono leading-relaxed">
                       {selectedAssignment.submissionNotes}
                     </div>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="border rounded-xl p-5 text-xs flex items-center justify-between">
+              <div className="border border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60 rounded-xl p-5 text-xs flex items-center justify-between">
                 <span>Not submitted yet.</span>
                 {!selectedAssignment.submissionsClosed && (
                   <button
@@ -178,7 +169,7 @@ export const AssignmentViewModal = () => {
                       setSelectedAssignment(null);
                       setEditingAssignment(asg);
                     }}
-                    className="px-3.5 border py-1.5 font-medium text-xs rounded-lg transition-colors"
+                    className="px-3.5 border border-primary-400 bg-primary-400 text-secondary-950 py-1.5 font-medium text-xs rounded-lg transition-colors hover:bg-primary-300 hover:border-primary-300"
                   >
                     Submit Assignment Now
                   </button>
@@ -193,7 +184,7 @@ export const AssignmentViewModal = () => {
           <button
             id="close-assignment-modal-footer-btn"
             onClick={() => setSelectedAssignment(null)}
-            className="px-6 py-2 border rounded-lg text-sm font-medium transition-colors shadow-sm"
+            className="px-6 py-2 border border-secondary-200 dark:border-secondary-700 rounded-lg text-sm font-medium transition-colors shadow-sm hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
           >
             Close
           </button>

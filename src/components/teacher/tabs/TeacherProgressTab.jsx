@@ -30,7 +30,10 @@ export const TeacherProgressTab = () => {
     }));
   };
 
-  const CircularProgress = ({ percentage, color = "var(--theme-accent)" }) => {
+  const CircularProgress = ({
+    percentage,
+    color = "var(--color-primary-400)",
+  }) => {
     const size = 52;
     const strokeWidth = 4.5;
     const center = size / 2;
@@ -45,7 +48,7 @@ export const TeacherProgressTab = () => {
             cx={center}
             cy={center}
             r={radius}
-            stroke="var(--theme-accent)"
+            stroke="var(--color-line)"
             strokeWidth={strokeWidth}
             fill="transparent"
           />
@@ -53,7 +56,7 @@ export const TeacherProgressTab = () => {
             cx={center}
             cy={center}
             r={radius}
-            stroke={percentage === 100 ? "var(--theme-success)" : color}
+            stroke={percentage === 100 ? "var(--color-accent-400)" : color}
             strokeWidth={strokeWidth}
             strokeDasharray={circumference}
             strokeDashoffset={offset}
@@ -69,8 +72,8 @@ export const TeacherProgressTab = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="border rounded-xl p-4 sm:p-5">
-        <div className="text-[11px] uppercase tracking-wider font-bold mb-1">
+      <div className="border border-line bg-surface rounded-xl p-4 sm:p-5">
+        <div className="text-[11px] uppercase tracking-wider font-bold mb-1 text-primary-600 dark:text-primary-300">
           COURSE PROGRESS
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
@@ -83,7 +86,9 @@ export const TeacherProgressTab = () => {
               setFilterMode((prev) => (prev === "mine" ? "all" : "mine"))
             }
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
-              filterMode === "mine" ? "" : ""
+              filterMode === "mine"
+                ? "border-primary-400/50 bg-primary-400/15 text-primary-600 dark:text-primary-300"
+                : "text-muted hover:text-ink"
             }`}
           >
             <Layout className="w-3.5 h-3.5" />
@@ -96,7 +101,7 @@ export const TeacherProgressTab = () => {
         </div>
       </div>
 
-      <div className="border rounded-xl p-5 sm:p-6 shadow-xl">
+      <div className="border border-line bg-surface rounded-xl p-5 sm:p-6 shadow-xl">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b">
           <div>
             <div className="text-[10px] uppercase font-bold tracking-wider mb-1">
@@ -106,7 +111,7 @@ export const TeacherProgressTab = () => {
               <h3 className="text-base sm:text-lg font-bold">
                 {teacherTrainer.name} - {teacherTrainer.campus}
               </h3>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold border">
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold border border-primary-400/40 bg-primary-400/15 text-primary-600 dark:text-primary-300">
                 {teacherTrainer.batch}
               </span>
             </div>
@@ -117,7 +122,7 @@ export const TeacherProgressTab = () => {
           </div>
 
           <div className="self-start sm:self-center">
-            <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold border shadow-sm">
+            <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold border border-primary-400/40 bg-primary-400/15 text-primary-600 dark:text-primary-300 shadow-sm">
               Topics: 56/81
             </span>
           </div>
@@ -127,11 +132,13 @@ export const TeacherProgressTab = () => {
         <div className="mt-5 mb-6">
           <div className="flex justify-between items-center text-xs mb-2">
             <span className="font-medium">Overall progress</span>
-            <span className="font-bold text-sm">69%</span>
+            <span className="font-bold text-sm text-primary-600 dark:text-primary-300">
+              69%
+            </span>
           </div>
-          <div className="w-full h-2.5 rounded-full overflow-hidden border">
+          <div className="w-full h-2.5 rounded-full overflow-hidden border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40">
             <div
-              className="h-full bg-white rounded-full transition-all duration-700 ease-out"
+              className="h-full bg-gradient-to-r from-primary-400 to-accent-400 rounded-full transition-all duration-700 ease-out"
               style={{ width: "69%" }}
             />
           </div>
@@ -146,7 +153,7 @@ export const TeacherProgressTab = () => {
             return (
               <div
                 key={mod.id}
-                className="border rounded-xl overflow-hidden transition-all duration-200"
+                className="border border-line bg-surface rounded-xl overflow-hidden transition-all duration-200"
               >
                 {/* Module Header Bar */}
                 <div
@@ -157,7 +164,11 @@ export const TeacherProgressTab = () => {
                     {/* Status Icon */}
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border ${
-                        isComplete ? "" : mod.percentage > 0 ? "" : ""
+                        isComplete
+                          ? "bg-accent-400/15 border-accent-400/50 text-accent-600 dark:text-accent-300"
+                          : mod.percentage > 0
+                            ? "bg-primary-400/15 border-primary-400/50 text-primary-600 dark:text-primary-300"
+                            : "bg-secondary-100 dark:bg-secondary-800/40 border-secondary-200 dark:border-secondary-700 text-muted"
                       }`}
                     >
                       {isComplete ? (
@@ -205,14 +216,20 @@ export const TeacherProgressTab = () => {
                         mod.topics.map((tpc, idx) => (
                           <div
                             key={idx}
-                            onClick={() => toggleTopicCompletion(mod.id, tpc.name)}
+                            onClick={() =>
+                              toggleTopicCompletion(mod.id, tpc.name)
+                            }
                             className={`flex items-start gap-2.5 p-2.5 rounded-lg border transition-all cursor-pointer ${
-                              tpc.completed ? "" : ""
+                              tpc.completed
+                                ? "bg-accent-400/10 border-accent-400/40"
+                                : "border-secondary-200 dark:border-secondary-700 bg-secondary-50 dark:bg-secondary-800/60"
                             }`}
                           >
                             <div
                               className={`w-4 h-4 rounded mt-0.5 flex items-center justify-center border transition-colors ${
-                                tpc.completed ? "" : ""
+                                tpc.completed
+                                  ? "bg-accent-400/20 border-accent-400/50 text-accent-600 dark:text-accent-300"
+                                  : "bg-secondary-100 dark:bg-secondary-800/40 border-secondary-200 dark:border-secondary-700 text-muted"
                               }`}
                             >
                               {tpc.completed && (
@@ -223,7 +240,7 @@ export const TeacherProgressTab = () => {
                             <div className="min-w-0 flex-1">
                               <div
                                 className={`text-xs font-medium leading-tight ${
-                                  tpc.completed ? "" : ""
+                                  tpc.completed ? "text-ink" : "text-muted"
                                 }`}
                               >
                                 {tpc.name}

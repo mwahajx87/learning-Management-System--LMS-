@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   FileText,
   FileEdit,
@@ -7,14 +7,15 @@ import {
   Upload,
   Edit2,
   ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
-import { useStudent } from '../../../context/StudentContext';
-import { StatsCard } from '../../common/StatsCard';
-import { StatusBadge } from '../../common/StatusBadge';
+  ChevronRight,
+} from "lucide-react";
+import { useStudent } from "../../../context/StudentContext";
+import { StatsCard } from "../../common/StatsCard";
+import { StatusBadge } from "../../common/StatusBadge";
 
 export const AssignmentPage = () => {
-  const { assignments, setSelectedAssignment, setEditingAssignment } = useStudent();
+  const { assignments, setSelectedAssignment, setEditingAssignment } =
+    useStudent();
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
@@ -22,25 +23,30 @@ export const AssignmentPage = () => {
 
   const paginatedAssignments = assignments.slice(
     (currentPage - 1) * pageSize,
-    currentPage * pageSize
+    currentPage * pageSize,
   );
 
   const assignedCount = assignments.length;
   const submittedCount = assignments.filter(
-    (a) => a.status === 'SUBMITTED' || a.status === 'APPROVED'
+    (a) => a.status === "SUBMITTED" || a.status === "APPROVED",
   ).length;
-  const pendingCount = assignments.filter((a) => a.status === 'NOT SUBMITTED').length;
+  const pendingCount = assignments.filter(
+    (a) => a.status === "NOT SUBMITTED",
+  ).length;
 
   return (
-    <div id="assignment-page-container" className="space-y-6 animate-fade-in pb-12">
+    <div
+      id="assignment-page-container"
+      className="space-y-6 animate-fade-in pb-12"
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <StatsCard
           id="stats-card-assigned"
           value={assignedCount}
           label="Assigned"
           icon={FileText}
-         
-         
+          iconBg="bg-info-400/10 border-info-400/30"
+          iconColor="text-info-600 dark:text-info-300"
         />
 
         <StatsCard
@@ -48,8 +54,8 @@ export const AssignmentPage = () => {
           value={submittedCount}
           label="Submitted"
           icon={FileEdit}
-         
-         
+          iconBg="bg-accent-400/10 border-accent-400/30"
+          iconColor="text-accent-600 dark:text-accent-300"
         />
 
         <StatsCard
@@ -57,12 +63,12 @@ export const AssignmentPage = () => {
           value={pendingCount}
           label="Pending"
           icon={Clock}
-         
-         
+          iconBg="bg-warning-400/10 border-warning-400/30"
+          iconColor="text-warning-600 dark:text-warning-300"
         />
       </div>
 
-      <div className="hidden md:block border rounded-2xl overflow-hidden shadow-sm">
+      <div className="hidden md:block border border-line bg-surface rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -86,16 +92,15 @@ export const AssignmentPage = () => {
             </thead>
             <tbody className="divide-y">
               {paginatedAssignments.map((asg) => (
-                <tr
-                  key={asg.id}
-                  className="transition-colors"
-                >
+                <tr key={asg.id} className="transition-colors">
                   {/* Assignment Title & Hackathon Pill */}
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-2.5">
                       <span
                         className={`text-sm font-medium ${
-                          asg.isHackathon ? '' : ''
+                          asg.isHackathon
+                            ? "text-warning-600 dark:text-warning-300"
+                            : ""
                         }`}
                       >
                         {asg.title}
@@ -107,20 +112,21 @@ export const AssignmentPage = () => {
                   {/* Topics count pill */}
                   <td className="py-4 px-6 whitespace-nowrap">
                     {asg.topicsCount > 0 ? (
-                      <span className="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold border">
-                        {asg.topicsCount} {asg.topicsCount === 1 ? 'Topic' : 'Topics'}
+                      <span className="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 text-info-600 dark:text-info-300">
+                        {asg.topicsCount}{" "}
+                        {asg.topicsCount === 1 ? "Topic" : "Topics"}
                       </span>
                     ) : (
-                      <span className="text-sm font-normal">
-                        No topics
-                      </span>
+                      <span className="text-sm font-normal">No topics</span>
                     )}
                   </td>
 
                   <td className="py-4 px-6 whitespace-nowrap">
                     <span
                       className={`text-sm font-medium ${
-                        asg.isHackathon ? '' : ''
+                        asg.isHackathon
+                          ? "text-warning-600 dark:text-warning-300"
+                          : ""
                       }`}
                     >
                       {asg.dueDate}
@@ -139,7 +145,7 @@ export const AssignmentPage = () => {
                         <button
                           id={`view-assignment-${asg.id}`}
                           onClick={() => setSelectedAssignment(asg)}
-                          className=" transition-colors"
+                          className="text-muted hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                           title="View Assignment Details"
                         >
                           <Eye className="w-4 h-4" />
@@ -153,7 +159,7 @@ export const AssignmentPage = () => {
                         <button
                           id={`view-assignment-${asg.id}`}
                           onClick={() => setSelectedAssignment(asg)}
-                          className=" transition-colors"
+                          className="text-muted hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                           title="View Assignment Details"
                         >
                           <Eye className="w-4 h-4" />
@@ -161,7 +167,7 @@ export const AssignmentPage = () => {
                         <button
                           id={`upload-assignment-${asg.id}`}
                           onClick={() => setEditingAssignment(asg)}
-                          className=" transition-colors"
+                          className="text-muted hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                           title="Upload / Submit Link"
                         >
                           <Upload className="w-4 h-4" />
@@ -169,7 +175,7 @@ export const AssignmentPage = () => {
                         <button
                           id={`edit-assignment-${asg.id}`}
                           onClick={() => setEditingAssignment(asg)}
-                          className=" transition-colors"
+                          className="text-muted hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                           title="Edit Submission Notes"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -187,7 +193,7 @@ export const AssignmentPage = () => {
           <div className="text-xs leading-tight select-none text-center sm:text-left">
             <div>
               Showing {(currentPage - 1) * pageSize + 1}-
-              {Math.min(currentPage * pageSize, assignments.length)} of{' '}
+              {Math.min(currentPage * pageSize, assignments.length)} of{" "}
               {assignments.length}
             </div>
             <div>records</div>
@@ -199,9 +205,7 @@ export const AssignmentPage = () => {
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
-                currentPage === 1
-                  ? 'cursor-not-allowed'
-                  : ' cursor-pointer'
+                currentPage === 1 ? "cursor-not-allowed" : " cursor-pointer"
               }`}
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -209,20 +213,22 @@ export const AssignmentPage = () => {
             </button>
 
             <div className="flex items-center gap-1">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <button
-                  key={pageNum}
-                  id={`pagination-page-${pageNum}`}
-                  onClick={() => setCurrentPage(pageNum)}
-                  className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors flex items-center justify-center ${
-                    currentPage === pageNum
-                      ? 'border'
-                      : ''
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (pageNum) => (
+                  <button
+                    key={pageNum}
+                    id={`pagination-page-${pageNum}`}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors flex items-center justify-center ${
+                      currentPage === pageNum
+                        ? "border border-primary-400/60 bg-primary-400/15 text-primary-600 dark:text-primary-300"
+                        : ""
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ),
+              )}
             </div>
 
             <button
@@ -231,8 +237,8 @@ export const AssignmentPage = () => {
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
                 currentPage === totalPages
-                  ? 'cursor-not-allowed'
-                  : ' cursor-pointer'
+                  ? "cursor-not-allowed"
+                  : " cursor-pointer"
               }`}
             >
               <span>Next</span>
@@ -254,8 +260,8 @@ export const AssignmentPage = () => {
                 </div>
                 <div className="text-xs mt-1">
                   {asg.topicsCount > 0
-                    ? `${asg.topicsCount} ${asg.topicsCount === 1 ? 'Topic' : 'Topics'}`
-                    : 'No topics'}
+                    ? `${asg.topicsCount} ${asg.topicsCount === 1 ? "Topic" : "Topics"}`
+                    : "No topics"}
                 </div>
               </div>
               <StatusBadge status={asg.status} />
@@ -302,12 +308,12 @@ export const AssignmentPage = () => {
         ))}
       </div>
 
-      <div className="md:hidden border rounded-2xl overflow-hidden shadow-sm">
+      <div className="md:hidden border border-line bg-surface rounded-2xl overflow-hidden shadow-sm">
         <div className="flex flex-col items-center justify-between gap-3 px-4 py-4">
           <div className="text-xs leading-tight select-none text-center">
             <div>
               Showing {(currentPage - 1) * pageSize + 1}-
-              {Math.min(currentPage * pageSize, assignments.length)} of{' '}
+              {Math.min(currentPage * pageSize, assignments.length)} of{" "}
               {assignments.length}
             </div>
             <div>records</div>
@@ -318,7 +324,7 @@ export const AssignmentPage = () => {
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
-                currentPage === 1 ? 'cursor-not-allowed' : ' cursor-pointer'
+                currentPage === 1 ? "cursor-not-allowed" : " cursor-pointer"
               }`}
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -326,24 +332,30 @@ export const AssignmentPage = () => {
             </button>
 
             <div className="flex items-center gap-1">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <button
-                  key={`m-${pageNum}`}
-                  onClick={() => setCurrentPage(pageNum)}
-                  className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors flex items-center justify-center ${
-                    currentPage === pageNum ? 'border' : ''
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (pageNum) => (
+                  <button
+                    key={`m-${pageNum}`}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-7 h-7 rounded-lg text-xs font-medium transition-colors flex items-center justify-center ${
+                      currentPage === pageNum
+                        ? "border border-primary-400/60 bg-primary-400/15 text-primary-600 dark:text-primary-300"
+                        : ""
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ),
+              )}
             </div>
 
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               className={`flex items-center gap-1.5 text-xs font-normal transition-colors ${
-                currentPage === totalPages ? 'cursor-not-allowed' : ' cursor-pointer'
+                currentPage === totalPages
+                  ? "cursor-not-allowed"
+                  : " cursor-pointer"
               }`}
             >
               <span>Next</span>

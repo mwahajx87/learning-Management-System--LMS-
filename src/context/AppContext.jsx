@@ -1,6 +1,19 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AppContext = createContext();
+
+const THEME_STORAGE_KEY = "smit-theme";
+
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return "light";
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored === "dark" || stored === "light") return stored;
+  } catch (e) {}
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
 
 export const AppProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,6 +44,22 @@ export const AppProvider = ({ children }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false); // Profile Modal
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  // Sync <html> class + colorScheme and persist whenever the theme changes
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    root.style.colorScheme = theme;
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch (e) {
+      /* storage unavailable — theme still applies for this session */
+    }
+  }, [theme]);
+
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
   // Helper functions
   const showToast = (message) => {
@@ -78,6 +107,8 @@ export const AppProvider = ({ children }) => {
         setIsFeedbackOpen,
         toastMessage,
         setToastMessage,
+        theme,
+        toggleTheme,
         showToast,
         copyToClipboard,
       }}

@@ -11,10 +11,10 @@ export const QuizPage = () => {
       {/* Important Information Notice Box */}
       <div
         id="quiz-important-notice-box"
-        className="border rounded-2xl p-6 relative"
+        className="border border-warning-500/40 bg-warning-500/5 rounded-2xl p-6 relative"
       >
         <div className="flex items-center gap-2.5 font-bold text-base mb-3">
-          <AlertTriangle className="w-5 h-5" />
+          <AlertTriangle className="w-5 h-5 text-warning-600 dark:text-warning-300" />
           <h3 className="font-bold">Important Information</h3>
         </div>
 
@@ -27,7 +27,7 @@ export const QuizPage = () => {
       </div>
 
       {/* Quizzes Table (desktop) */}
-      <div className="hidden md:block border rounded-2xl overflow-hidden shadow-sm">
+      <div className="hidden md:block border border-line bg-surface rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
@@ -53,10 +53,7 @@ export const QuizPage = () => {
                 const isWarningAttempt = quiz.attempts.startsWith("2");
 
                 return (
-                  <tr
-                    key={quiz.id}
-                    className="transition-colors"
-                  >
+                  <tr key={quiz.id} className="transition-colors">
                     {/* Title */}
                     <td
                       onClick={() => setSelectedQuiz(quiz)}
@@ -72,7 +69,7 @@ export const QuizPage = () => {
 
                     {/* Questions badge */}
                     <td className="py-4 px-5 text-center whitespace-nowrap">
-                      <span className="px-2.5 py-1 text-xs font-bold rounded-lg border">
+                      <span className="px-2.5 py-1 text-xs font-bold rounded-lg border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 text-info-600 dark:text-info-300">
                         {quiz.questions}
                       </span>
                     </td>
@@ -80,7 +77,7 @@ export const QuizPage = () => {
                     {/* Attempts */}
                     <td className="py-4 px-5 text-center whitespace-nowrap">
                       {isWarningAttempt ? (
-                        <span className="px-2 py-0.5 rounded text-xs font-bold border">
+                        <span className="px-2 py-0.5 rounded text-xs font-bold border border-warning-400/50 bg-warning-400/10 text-warning-600 dark:text-warning-300">
                           {quiz.attempts}
                         </span>
                       ) : (
@@ -91,7 +88,7 @@ export const QuizPage = () => {
                     </td>
 
                     {/* Percentage */}
-                    <td className="py-4 px-5 text-center font-bold whitespace-nowrap">
+                    <td className="py-4 px-5 text-center font-bold whitespace-nowrap text-accent-600 dark:text-accent-300">
                       {quiz.percentage}
                     </td>
 
@@ -109,7 +106,7 @@ export const QuizPage = () => {
                     <td className="py-4 px-5 text-right whitespace-nowrap">
                       <button
                         onClick={() => setSelectedQuiz(quiz)}
-                        className="px-4 py-1.5 rounded-lg text-xs font-semibold border transition-colors"
+                        className="px-4 py-1.5 rounded-lg text-xs font-semibold border border-secondary-200 dark:border-secondary-700 hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                       >
                         {quiz.action || "Completed"}
                       </button>
@@ -128,13 +125,14 @@ export const QuizPage = () => {
           const isWarningAttempt = quiz.attempts.startsWith("2");
 
           return (
-            <div key={quiz.id} className="border rounded-2xl p-4 space-y-3">
+            <div
+              key={quiz.id}
+              className="border border-line bg-surface rounded-2xl p-4 space-y-3"
+            >
               {/* Title + Status */}
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="text-sm font-bold truncate">
-                    {quiz.title}
-                  </div>
+                  <div className="text-sm font-bold truncate">{quiz.title}</div>
                   <div className="text-xs mt-0.5">{quiz.module}</div>
                 </div>
                 <StatusBadge status={quiz.status} />
@@ -144,18 +142,20 @@ export const QuizPage = () => {
               <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
                 <div>
                   <div className="mb-1">Questions</div>
-                  <span className="inline-flex px-2.5 py-1 text-xs font-bold rounded-lg border">
+                  <span className="inline-flex px-2.5 py-1 text-xs font-bold rounded-lg border border-secondary-200 dark:border-secondary-700 bg-secondary-100 dark:bg-secondary-800/40 text-info-600 dark:text-info-300">
                     {quiz.questions}
                   </span>
                 </div>
                 <div>
                   <div className="mb-1">Percentage</div>
-                  <span className="font-bold">{quiz.percentage}</span>
+                  <span className="font-bold text-accent-600 dark:text-accent-300">
+                    {quiz.percentage}
+                  </span>
                 </div>
                 <div>
                   <div className="mb-1">Attempts</div>
                   {isWarningAttempt ? (
-                    <span className="inline-flex px-2 py-0.5 rounded text-xs font-bold border">
+                    <span className="inline-flex px-2 py-0.5 rounded text-xs font-bold border border-warning-400/50 bg-warning-400/10 text-warning-600 dark:text-warning-300">
                       {quiz.attempts}
                     </span>
                   ) : (
@@ -171,7 +171,7 @@ export const QuizPage = () => {
               {/* Full-width Action */}
               <button
                 onClick={() => setSelectedQuiz(quiz)}
-                className="w-full px-4 py-2 rounded-lg text-xs font-semibold border transition-colors"
+                className="w-full px-4 py-2 rounded-lg text-xs font-semibold border border-secondary-200 dark:border-secondary-700 hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
               >
                 {quiz.action || "Completed"}
               </button>

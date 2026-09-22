@@ -20,7 +20,7 @@ export const TeacherQuizzesTab = () => {
   return (
     <div className="flex flex-col gap-4">
       {/* Top Header Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-xl border">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-xl border border-line bg-surface">
         <div>
           <h2 className="text-sm font-semibold">
             Course Quizzes & Assessments
@@ -35,14 +35,14 @@ export const TeacherQuizzesTab = () => {
           id="teacher-new-quiz-btn"
           type="button"
           onClick={() => setIsNewQuizOpen(true)}
-          className="flex border items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all cursor-pointer border border-primary-400 bg-primary-400 text-secondary-950 hover:bg-primary-300 hover:border-primary-300 shadow-primary-400/20"
         >
           <Plus className="w-4 h-4" />
           <span>New Quiz</span>
         </button>
       </div>
 
-      <div className="hidden md:block rounded-xl border overflow-hidden shadow-lg">
+      <div className="hidden md:block rounded-xl border border-line bg-surface overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -88,7 +88,9 @@ export const TeacherQuizzesTab = () => {
                   <td className="py-3.5 align-top text-center">
                     <span
                       className={`inline-flex items-center  text-center px-1.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${
-                        q.isActive ? " border" : " border"
+                        q.isActive
+                          ? " border-accent-400/40 bg-accent-400/10 text-accent-600 dark:text-accent-300"
+                          : " border-secondary-300/70 dark:border-secondary-600/60 bg-secondary-100 dark:bg-secondary-800/40 text-muted"
                       }`}
                     >
                       {q.status}
@@ -102,7 +104,9 @@ export const TeacherQuizzesTab = () => {
                         type="button"
                         onClick={() => toggleQuizStatus(q.id)}
                         className={`p-1 transition-colors rounded ${
-                          q.isActive ? "" : ""
+                          q.isActive
+                            ? "text-accent-600 dark:text-accent-300"
+                            : "text-muted"
                         }`}
                         title={
                           q.isActive
@@ -111,9 +115,9 @@ export const TeacherQuizzesTab = () => {
                         }
                       >
                         {q.isActive ? (
-                          <ToggleRight className="w-5 h-5" />
+                          <ToggleRight className="w-5 h-5 text-accent-600 dark:text-accent-300" />
                         ) : (
-                          <ToggleLeft className="w-5 h-5" />
+                          <ToggleLeft className="w-5 h-5 text-muted" />
                         )}
                       </button>
 
@@ -123,7 +127,7 @@ export const TeacherQuizzesTab = () => {
                         onClick={() => {
                           setSelectedTeacherQuiz(q);
                         }}
-                        className="p-1 rounded transition-colors"
+                        className="p-1 rounded transition-colors hover:text-primary-600 dark:hover:text-primary-300"
                         title="View Student Results & Score Distribution"
                       >
                         <Eye className="w-4 h-4" />
@@ -139,13 +143,18 @@ export const TeacherQuizzesTab = () => {
 
       <div className="md:hidden space-y-3">
         {teacherQuizzes.map((q) => (
-          <div key={q.id} className="rounded-xl border p-4 space-y-3">
+          <div
+            key={q.id}
+            className="rounded-xl border border-line bg-surface p-4 space-y-3"
+          >
             {/* Title + Status */}
             <div className="flex items-start justify-between gap-3">
               <span className="text-sm font-semibold min-w-0">{q.title}</span>
               <span
                 className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase border shrink-0 ${
-                  q.isActive ? " border" : " border"
+                  q.isActive
+                    ? " border-accent-400/40 bg-accent-400/10 text-accent-600 dark:text-accent-300"
+                    : " border-secondary-300/70 dark:border-secondary-600/60 bg-secondary-100 dark:bg-secondary-800/40 text-muted"
                 }`}
               >
                 {q.status}
@@ -181,15 +190,15 @@ export const TeacherQuizzesTab = () => {
                 }
               >
                 {q.isActive ? (
-                  <ToggleRight className="w-5 h-5" />
+                  <ToggleRight className="w-5 h-5 text-accent-600 dark:text-accent-300" />
                 ) : (
-                  <ToggleLeft className="w-5 h-5" />
+                  <ToggleLeft className="w-5 h-5 text-muted" />
                 )}
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedTeacherQuiz(q)}
-                className="p-2 rounded-lg border transition-colors"
+                className="p-2 rounded-lg border border-secondary-200 dark:border-secondary-700 transition-colors hover:border-primary-400/50 hover:text-primary-600 dark:hover:text-primary-300"
                 title="View Student Results & Score Distribution"
               >
                 <Eye className="w-4 h-4" />

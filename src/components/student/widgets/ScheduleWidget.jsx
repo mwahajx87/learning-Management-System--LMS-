@@ -7,9 +7,12 @@ export const ScheduleWidget = () => {
     useStudent();
 
   return (
-    <div id="class-schedule-widget" className="border rounded-2xl p-5">
+    <div
+      id="class-schedule-widget"
+      className="border border-line bg-surface rounded-2xl p-5"
+    >
       <div className="flex items-center gap-2 mb-4">
-        <Calendar className="w-4 h-4" />
+        <Calendar className="w-4 h-4 text-primary-600 dark:text-primary-300" />
         <h3 className="text-base font-bold tracking-normal">Class Schedule</h3>
       </div>
 
@@ -26,9 +29,9 @@ export const ScheduleWidget = () => {
               onClick={() => setSelectedScheduleDay(item.date)}
               className={`flex flex-col items-center justify-center py-2.5 px-1 rounded-xl transition-all cursor-pointer ${
                 isClassDay
-                  ? "font-semibold bg-white text-black"
+                  ? "font-semibold bg-primary-400 text-secondary-950"
                   : isSelected
-                    ? `${isClassDay ? "ring-black ring-1" : "ring-white ring-1"}`
+                    ? "ring-1 ring-primary-400/60"
                     : ""
               }`}
             >
